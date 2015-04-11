@@ -1,0 +1,31 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp' 
+apply plugin: 'jetty'
+
+version = '1.0'
+ 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+ 
+apply plugin: 'java'
+ 
+tasks.withType(Compile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+ 
+//Project dependencies
+dependencies {
+    compile 'org.springframework:spring-webmvc:4.0.6.RELEASE'
+    compile 'org.springframework:spring-context-support:4.0.6.RELEASE'
+    compile 'org.freemarker:freemarker:2.3.20'
+    //include in compile only, exclude in the war
+    providedCompile 'javax.servlet:servlet-api:2.5'
+
+}
+
