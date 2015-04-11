@@ -37,7 +37,7 @@
 	<div class="panel-heading">
 		<h3 class="panel-title">${header}</h3>
 	</div>
-	<div class="panel-body" id=${id}>
+	<div class="panel-body" id="${id}">
 		<#nested>
 	</div>
 </div>

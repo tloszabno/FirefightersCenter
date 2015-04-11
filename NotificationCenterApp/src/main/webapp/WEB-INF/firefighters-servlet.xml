@@ -17,6 +17,9 @@
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".ftl" />
 	</bean> -->
+
+    <import resource="classpath:spring-context.xml" />
+
  
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
