@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.edu.agh.integracja.firefighterspost.service.AlertService;
 
 @Controller
 @EnableAutoConfiguration
@@ -25,6 +26,7 @@ public class PostController {
     @RequestMapping(value = "/alert", method = RequestMethod.POST)
     @ResponseBody
     String alert() {
+        new AlertService().performAlarm();
         return "Alert!!!!";
     }
 }

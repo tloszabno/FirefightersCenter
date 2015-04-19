@@ -3,6 +3,9 @@ package pl.edu.agh.integracja.firefighterspost;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.springframework.boot.SpringApplication;
+import pl.edu.agh.integracja.firefighterspost.controller.PostController;
+import pl.edu.agh.integracja.firefighterspost.view.AppView;
 
 public class Application {
 
@@ -10,6 +13,9 @@ public class Application {
 
     public static void main(String[] args) {
         PropertyConfigurator.configure("log4j.properties");
-        LOG.info("MAIN FIREFIGHTERS APP");
+        LOG.info("Starting App");
+        SpringApplication.run(PostController.class, args);
+        AppView.main(args);
+        LOG.info("Application started");
     }
 }
