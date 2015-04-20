@@ -85,10 +85,6 @@ public class Komisariat implements Serializable {
 		this.ipSystemu = ipSystemu;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

@@ -8,32 +8,28 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import pl.agh.tomtom.firefighters.dao.ZgloszenieDAO;
 
 @Controller
-public class WelcomeController {
+public class MainController {
 
 	private static final Logger log = LogManager
-			.getLogger(WelcomeController.class);
+			.getLogger(MainController.class);
 
 	@Autowired
 	@Qualifier("zgloszenieDAO")
 	@Required
 	private ZgloszenieDAO zgloszenieDAO;
 
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public ModelAndView welcome(@RequestParam("name") String name) {
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ModelAndView index() {
 		log.entry();
 
-		ModelAndView model = new ModelAndView();
-		model.setViewName("index");
-		model.addObject("name", name);
+		ModelAndView model = FirefightersViewHelper.createMAV("index");
 
 		log.exit();
 		return model;
-
 	}
 }
