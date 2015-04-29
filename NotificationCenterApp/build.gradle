@@ -10,10 +10,6 @@ targetCompatibility = 1.8
  
 apply plugin: 'java'
  
-tasks.withType(Compile) {
-    options.encoding = 'UTF-8'
-}
-
 repositories {
     mavenLocal()
     mavenCentral()
@@ -21,7 +17,7 @@ repositories {
 
 configurations {    
     provided
-    provided.extendsFrom(compile)
+  //  provided.extendsFrom(compile)
 }
  
 //Project dependencies

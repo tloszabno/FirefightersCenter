@@ -1,51 +1,51 @@
-#navigation_bar_div{
+#navigation_bar_div {
     background-color: #555555 !important;
 }
 
-body{
+body {
     background-color: #EEEEEE !important;
 }
 
-.menu_element_btn{
+.menu_element_btn {
     margin: 10px;
 }
 
-.menu_link{
+.menu_link {
     font-weight: bold;
-    color: #E27A7A !important; 
-}
-.navbar-brand{
-    font-weight: bold;
-    color: #FFF !important;     
+    color: #E27A7A !important;
 }
 
-.bgr_primary{
+.navbar-brand {
+    font-weight: bold;
+    color: #FFF !important;
+}
+
+.bgr_primary {
     #background-color: #EEEEEE !important;
 }
 
-#address_map{
+#address_map {
     margin: auto;
     padding: 10px;
     text-align: center;
 }
 
-#address_info{
+#address_info {
     margin: auto;
     padding: 10px;
     text-align: center;
 }
 
-#address_map img{
+#address_map img {
     position: relative;
 }
 
-#address_info{
+#address_info {
     font-size: 120%;
 }
 
-.carousel-inner > .item > img, 
-.carousel-inner > .item > a > img{
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
     margin: auto;
     padding: 10px;
 }
-#map-canvas { height: 500px; width: 500px; margin: 0; padding: 0;}

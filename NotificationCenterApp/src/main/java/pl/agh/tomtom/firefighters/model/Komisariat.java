@@ -29,6 +29,9 @@ public class Komisariat implements Serializable {
 	@Column(name = "miasto", length = 300, nullable = false)
 	private String miasto;
 
+	@Column(name = "gmina", length = 300, nullable = false)
+	private String gmina;
+
 	@Column(name = "ip_systemu", length = 100, nullable = false)
 	private String ipSystemu;
 
@@ -36,12 +39,13 @@ public class Komisariat implements Serializable {
 	}
 
 	public Komisariat(Long id, String nazwa, String adres, String miasto,
-			String ipSystemu) {
+			String gmina, String ipSystemu) {
 		super();
 		this.id = id;
 		this.nazwa = nazwa;
 		this.adres = adres;
 		this.miasto = miasto;
+		this.gmina = gmina;
 		this.ipSystemu = ipSystemu;
 	}
 
@@ -83,6 +87,14 @@ public class Komisariat implements Serializable {
 
 	public void setIpSystemu(String ipSystemu) {
 		this.ipSystemu = ipSystemu;
+	}
+
+	public void setGmina(String gmina) {
+		this.gmina = gmina;
+	}
+
+	public String getGmina() {
+		return gmina;
 	}
 
 	@Override
