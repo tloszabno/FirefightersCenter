@@ -1,8 +1,5 @@
 apply plugin: 'java'
 
-
-
-
 version = '1.0'
 
 sourceCompatibility = 1.8
@@ -10,16 +7,12 @@ targetCompatibility = 1.8
 
 compileJava.options.encoding = 'UTF-8'
 
-
-
 repositories {
     mavenCentral()
     jcenter()
 }
 
 buildscript {
-
-
     repositories {
         mavenCentral()
         jcenter()
@@ -38,22 +31,6 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web:1.2.3.RELEASE'
 
     testCompile 'junit:junit:4.11'
-
-//    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
-
 }
 
-task jarAll(type: Jar) {
-    manifest {
-        attributes 'Implementation-Title': 'Gradle Jar File with all dependencies',
-                'Implementation-Version': version,
-                'Main-Class': 'pl.edu.agh.integracja.firefighterspost.FirefighterPostApp'
-    }
-    baseName = project.name + '-all'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
-}
-
-bootRepackage {
-    mainClass = 'pl.edu.agh.integracja.firefighterspost.FirefighterPostApp'
-}
+mainClassName = 'pl.edu.agh.integracja.firefighterspost.FirefighterPostApp'
