@@ -13,12 +13,12 @@
 #newEditNofiticationFormInputs{
     width: 30%;
     float: left;
-    margin: 50px;
-    padding: 50px;
+    margin-right: 20px;
+    padding: 20px;
 }
 
 #map-canvas{
-    height: 500px;
+    height: 300px;
     width: 50%;
     margin: 50px;
     padding: 50px;
@@ -29,16 +29,20 @@
 <div id="newEditNofiticationForm">
     <form id="newEditNofiticationFormInputs">
         <div class="form-group"> 
-            <label for="adres">Adres</label>
-            <input class="form-control" v-on="change: changeLocation" v-model="adres" type="text" id="adres" placeholder="Adres"/>
+            <label for="address">Adres</label>
+            <input class="form-control" v-on="change: changeLocation" v-model="notification.address" type="text" id="address" placeholder="Adres"/>
         </div>
         <div class="form-group"> 
             <label for="city">Miasto</label>
-            <input class="form-control" v-on="change: changeLocation" v-model="miasto" type="text" id="miasto" placeholder="Miasto"/>
+            <input class="form-control" v-on="change: changeLocation" v-model="notification.city" type="text" id="city" placeholder="Miasto"/>
         </div>
         <div class="form-group"> 
-            <label for="typ">Typ akcji</label>
-            <input class="form-control" v-model="typ" type="text" id="typ" placeholder="Typ akcji"/>
+            <label for="type">Typ akcji</label>
+            <input class="form-control" v-model="type" type="text" id="notification.type" placeholder="Typ akcji"/>
+        </div>
+        <div class="form-group"> 
+            <label for="description">Opis</label>
+            <textarea class="form-control" v-model="notification.description" id="description" rows="4" placeholder="Opis"></textarea>
         </div>
     </form>
     <div id="map-canvas" class="mapContainer"></div>

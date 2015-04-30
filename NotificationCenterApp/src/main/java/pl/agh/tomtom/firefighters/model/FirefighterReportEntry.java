@@ -11,19 +11,20 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity
-@Table(name = "raporty_srodki_gasnicze")
-public class RaportSrodekGasniczy implements Serializable {
-
+@Table(name = "firefighter_report_entry")
+public class FirefighterReportEntry implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue
 	private Long id;
 
-	@Column(name = "zrodlo_tankowania", nullable = false, length = 300)
-	private String zrodloTankowania;
+	@Column(name = "first_name", length = 300, nullable = false)
+	private String firstName;
 
-	public RaportSrodekGasniczy() {
+	@Column(name = "surname", length = 300, nullable = false)
+	private String surname;
+
+	public FirefighterReportEntry() {
 	}
 
 	public Long getId() {
@@ -34,12 +35,20 @@ public class RaportSrodekGasniczy implements Serializable {
 		this.id = id;
 	}
 
-	public String getZrodloTankowania() {
-		return zrodloTankowania;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setZrodloTankowania(String zrodloTankowania) {
-		this.zrodloTankowania = zrodloTankowania;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	@Override

@@ -1,33 +1,35 @@
-$(document).ready(function (){
+$(document).ready(function() {
 
-	var v = new Vue({
-		el: "#helloContainter",
-		data: {
-			time: 14
-		}
+    var data = {
+        notification: {
+            id: null,
+            gpsXCoordinate: null,
+            gpsYCoordinate: null,
+            actionState: "NEW",
+            address: "",
+            city: "",
+            type: "",
+            description: ""
+        }
+    };
 
-	});
+    var notificationFormMVVM = new Vue({
+        el: "#newEditNofiticationForm",
+        data: data,
+        methods: {
+            changeLocation: function() {
+                var address = this.$data.notification.address;
+                var city = this.$data.notification.city;
+                if (address.length > 0 && city.length > 0) {
+                    gmapFasade.codeNotificationAddress(city + "," + address + ", POLAND");
+                }
+            }
+        }
+    });
 
-
-	var notificationData = {
-		adres: "",
-		miasto: "",
-		typ : ""
-	}
-
-	var notificationFormMVVM = new Vue({
-		el: "#newEditNofiticationForm",
-		data: notificationData,
-		methods: {
-			changeLocation:function(){
-				var address = this.$data.adres;
-				var city = this.$data.miasto;
-				if(  address.length > 0  && city.length > 0 ){
-					codeNotificationAddress(city + "," + address + ",POLAND" );
-				}
-			}
-		}
-	});
-
+    var gmapFasade = new GmapFasade(notificationFormMVVM);
+    gmapFasade.initialize();
+	gmapFasade.optimizeSize()
+    $(window).resize(gmapFasade.optimizeSize);
 
 });

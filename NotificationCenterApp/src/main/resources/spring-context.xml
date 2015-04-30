@@ -33,7 +33,7 @@
 			<props>
 				<!-- <prop key="dialect">org.hibernate.dialect.H2Dialect</prop> -->
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
 				<prop key="current_session_context_class">thread</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
@@ -53,7 +53,7 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 	
-	<bean id="zgloszenieDAO" class="pl.agh.tomtom.firefighters.dao.ZgloszenieDAO">
+	<bean id="fireNotificationDAO" class="pl.agh.tomtom.firefighters.dao.FireNotificationDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>	
 

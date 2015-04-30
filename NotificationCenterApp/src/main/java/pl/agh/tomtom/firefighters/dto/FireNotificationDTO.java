@@ -2,29 +2,29 @@ package pl.agh.tomtom.firefighters.dto;
 
 import java.util.Date;
 
-public class ZgloszenieDTO {
+public class FireNotificationDTO {
 
 	private Long id;
 
-	private String typ;
+	private String type;
 
-	private String adres;
+	private String address;
 
-	private String miasto;
+	private String city;
 
-	private Double wspGpsX;
+	private Double gpsXCoordinate;
 
-	private Double wspGpsY;
+	private Double gpsYCoordinate;
 
-	private String stanAkcji;
+	private String actionState;
 
-	private String opis;
+	private String description;
 
-	private Date dataZgloszenia;
+	private Date notificationDate;
 
-	private Date dataZakonczenia;
+	private Date finishDate;
 
-	private String autor;
+	private String creator;
 
 	public Long getId() {
 		return id;
@@ -35,83 +35,83 @@ public class ZgloszenieDTO {
 	}
 
 	public String getTyp() {
-		return typ;
+		return type;
 	}
 
 	public void setTyp(String typ) {
-		this.typ = typ;
+		this.type = typ;
 	}
 
 	public String getAdres() {
-		return adres;
+		return address;
 	}
 
 	public void setAdres(String adres) {
-		this.adres = adres;
+		this.address = adres;
 	}
 
 	public String getMiasto() {
-		return miasto;
+		return city;
 	}
 
 	public void setMiasto(String miasto) {
-		this.miasto = miasto;
+		this.city = miasto;
 	}
 
 	public Double getWspGpsX() {
-		return wspGpsX;
+		return gpsXCoordinate;
 	}
 
 	public void setWspGpsX(Double wspGpsX) {
-		this.wspGpsX = wspGpsX;
+		this.gpsXCoordinate = wspGpsX;
 	}
 
 	public Double getWspGpsY() {
-		return wspGpsY;
+		return gpsYCoordinate;
 	}
 
 	public void setWspGpsY(Double wspGpsY) {
-		this.wspGpsY = wspGpsY;
+		this.gpsYCoordinate = wspGpsY;
 	}
 
 	public String getStanAkcji() {
-		return stanAkcji;
+		return actionState;
 	}
 
 	public void setStanAkcji(String stanAkcji) {
-		this.stanAkcji = stanAkcji;
+		this.actionState = stanAkcji;
 	}
 
 	public String getOpis() {
-		return opis;
+		return description;
 	}
 
 	public void setOpis(String opis) {
-		this.opis = opis;
+		this.description = opis;
 	}
 
 	public Date getDataZgloszenia() {
-		return dataZgloszenia;
+		return notificationDate;
 	}
 
 	public void setDataZgloszenia(Date dataZgloszenia) {
-		this.dataZgloszenia = dataZgloszenia;
+		this.notificationDate = dataZgloszenia;
 	}
 
 	public Date getDataZakonczenia() {
-		return dataZakonczenia;
+		return finishDate;
 	}
 
 	public void setDataZakonczenia(Date dataZakonczenia) {
-		this.dataZakonczenia = dataZakonczenia;
+		this.finishDate = dataZakonczenia;
 	}
 
 	public String getAutor() {
-		return autor;
+		return creator;
 	}
 
 	public void setAutor(String autor) {
-		this.autor = autor;
+		this.creator = autor;
 	}
 
 }

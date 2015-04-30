@@ -48,6 +48,8 @@
     <script src="resources/js/constants.js"></script>
     <script src="resources/js/underscore.string.min.js"></script>
     <script src="resources/js/vue.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
+    <script type="text/javascript" src="resources/js/gmapsfasade.js"></script>
     <script src="resources/js/scripts.js"></script>
   </head>
   <body>

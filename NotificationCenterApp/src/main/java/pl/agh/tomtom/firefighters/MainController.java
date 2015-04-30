@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import pl.agh.tomtom.firefighters.dao.ZgloszenieDAO;
+import pl.agh.tomtom.firefighters.dao.FireNotificationDAO;
 
 @Controller
 public class MainController {
@@ -19,9 +19,9 @@ public class MainController {
 			.getLogger(MainController.class);
 
 	@Autowired
-	@Qualifier("zgloszenieDAO")
+	@Qualifier("fireNotificationDAO")
 	@Required
-	private ZgloszenieDAO zgloszenieDAO;
+	private FireNotificationDAO fireNotificationDAO;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index() {
