@@ -16,10 +16,12 @@ function GmapFasade(notificationFormMVVM){
 
 
     this.codeNotificationAddress = function(address) {
+        setProgress(0);
         var addressObj = {
             address: address
         };
         geocoder.geocode(addressObj, onNotificationLocationFound);
+        setProgress(30);
     }
 
     this.optimizeSize = function(){
@@ -35,9 +37,29 @@ function GmapFasade(notificationFormMVVM){
 
     function setModelGPSLocation(location) {
         //sconsole.log('location=' + location.lat() + " lng=" + location.lng() );
+        setProgressState(true);
         var obj = notificationFormMVVM.$data.notification;
         obj.gpsXCoordinate = location.lat();
         obj.gpsYCoordinate = location.lng();
+        setProgress(100);
+    }
+
+    function setProgress(val){
+        var obj = notificationFormMVVM.$data.gmap;
+        obj.loadProgress = val;
+    }
+    function setProgressState(ok, errMsg){
+        var obj = notificationFormMVVM.$data.gmap;
+        if( ok ){
+            obj.progressBarClass = "progress-bar-success";
+            obj.progressBarMsg = "";
+        }else{
+            obj.progressBarClass = "progress-bar-danger";
+            if( errMsg != undefined) {
+                obj.progressBarMsg = errMsg;
+            }
+        }
+        
     }
 
     function setNotificationLocation(location) {
@@ -57,9 +79,12 @@ function GmapFasade(notificationFormMVVM){
     function onNotificationLocationFound(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             map.setCenter(results[0].geometry.location); //center the map over the result
+            setProgressState(true);
             //place a marker at the location
             setNotificationLocation(results[0].geometry.location);
         } else {
+            setProgressState(false, "Nie mozna znalezc lokalizacji" );
+            setProgress(100);
             console.log('Geocode was not successful for the following reason: ' + status);
         }
     }

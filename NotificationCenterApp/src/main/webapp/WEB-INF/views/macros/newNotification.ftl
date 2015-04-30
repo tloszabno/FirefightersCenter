@@ -44,6 +44,11 @@
             <label for="description">Opis</label>
             <textarea class="form-control" v-model="notification.description" id="description" rows="4" placeholder="Opis"></textarea>
         </div>
+        <div class="progress">
+          <div class="progress-bar {{gmap.progressBarClass}}" role="progressbar" aria-valuenow="{{gmaps.loadProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{gmap.loadProgress}}%">
+            {{gmap.progressBarMsg}}
+          </div>
+        </div>
     </form>
     <div id="map-canvas" class="mapContainer"></div>
 </div> 

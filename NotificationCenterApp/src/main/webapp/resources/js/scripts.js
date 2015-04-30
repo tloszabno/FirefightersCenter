@@ -10,6 +10,11 @@ $(document).ready(function() {
             city: "",
             type: "",
             description: ""
+        },
+        gmap: {
+        	loadProgress : 0,
+        	progressBarClass: "progress-bar-success",
+        	progressBarMsg: ""
         }
     };
 
