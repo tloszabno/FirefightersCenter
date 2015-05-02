@@ -14,16 +14,13 @@
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li class="active">
-            <button type="button" class="menu_element_btn btn btn-primary navbar-btn active">${text.newNotificationBtnMsg}</button>
+            <button type="button" class="menu_element_btn btn btn-primary navbar-btn active" onclick="location.href='newFireNotication.htm'">${text.newNotificationBtnMsg}</button>
           </li>
           <li>
-            <button type="button" class="menu_element_btn btn btn-danger  navbar-btn">${text.notifitacionBtnMsg}</button>
+            <button type="button" class="menu_element_btn btn btn-danger  navbar-btn" onclick="location.href='allFireNotification.htm'">${text.notifitacionBtnMsg}</button>
           </li>
           <li>
-            <button type="button" class="menu_element_btn btn btn-danger  navbar-btn">${text.stationsBtnMsg}</button>
-          </li>
-          <li>
-            <button type="button" class="menu_element_btn btn btn-danger  navbar-btn">${text.reportsBtnMsg}</button>
+            <button type="button" class="menu_element_btn btn btn-danger  navbar-btn" onclick="location.href='newFireNotication.htm'">${text.stationsBtnMsg}</button>
           </li>
         </ul>
       </div>
@@ -48,9 +45,6 @@
     <script src="resources/js/constants.js"></script>
     <script src="resources/js/underscore.string.min.js"></script>
     <script src="resources/js/vue.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
-    <script type="text/javascript" src="resources/js/gmapsfasade.js"></script>
-    <script src="resources/js/scripts.js"></script>
   </head>
   <body>
 

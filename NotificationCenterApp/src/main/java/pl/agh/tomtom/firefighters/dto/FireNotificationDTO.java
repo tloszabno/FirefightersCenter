@@ -34,84 +34,84 @@ public class FireNotificationDTO {
 		this.id = id;
 	}
 
-	public String getTyp() {
+	public String getType() {
 		return type;
 	}
 
-	public void setTyp(String typ) {
-		this.type = typ;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public String getAdres() {
+	public String getAddress() {
 		return address;
 	}
 
-	public void setAdres(String adres) {
-		this.address = adres;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getMiasto() {
+	public String getCity() {
 		return city;
 	}
 
-	public void setMiasto(String miasto) {
-		this.city = miasto;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public Double getWspGpsX() {
+	public Double getGpsXCoordinate() {
 		return gpsXCoordinate;
 	}
 
-	public void setWspGpsX(Double wspGpsX) {
-		this.gpsXCoordinate = wspGpsX;
+	public void setGpsXCoordinate(Double gpsXCoordinate) {
+		this.gpsXCoordinate = gpsXCoordinate;
 	}
 
-	public Double getWspGpsY() {
+	public Double getGpsYCoordinate() {
 		return gpsYCoordinate;
 	}
 
-	public void setWspGpsY(Double wspGpsY) {
-		this.gpsYCoordinate = wspGpsY;
+	public void setGpsYCoordinate(Double gpsYCoordinate) {
+		this.gpsYCoordinate = gpsYCoordinate;
 	}
 
-	public String getStanAkcji() {
+	public String getActionState() {
 		return actionState;
 	}
 
-	public void setStanAkcji(String stanAkcji) {
-		this.actionState = stanAkcji;
+	public void setActionState(String actionState) {
+		this.actionState = actionState;
 	}
 
-	public String getOpis() {
+	public String getDescription() {
 		return description;
 	}
 
-	public void setOpis(String opis) {
-		this.description = opis;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public Date getDataZgloszenia() {
+	public Date getNotificationDate() {
 		return notificationDate;
 	}
 
-	public void setDataZgloszenia(Date dataZgloszenia) {
-		this.notificationDate = dataZgloszenia;
+	public void setNotificationDate(Date notificationDate) {
+		this.notificationDate = notificationDate;
 	}
 
-	public Date getDataZakonczenia() {
+	public Date getFinishDate() {
 		return finishDate;
 	}
 
-	public void setDataZakonczenia(Date dataZakonczenia) {
-		this.finishDate = dataZakonczenia;
+	public void setFinishDate(Date finishDate) {
+		this.finishDate = finishDate;
 	}
 
-	public String getAutor() {
+	public String getCreator() {
 		return creator;
 	}
 
-	public void setAutor(String autor) {
-		this.creator = autor;
+	public void setCreator(String creator) {
+		this.creator = creator;
 	}
 
 }
