@@ -13,32 +13,36 @@ public class EquipmentReportEntryDTO {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public EquipmentReportEntryDTO setId(Long id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getEquipmentType() {
 		return equipmentType;
 	}
 
-	public void setEquipmentType(String equipmentType) {
+	public EquipmentReportEntryDTO setEquipmentType(String equipmentType) {
 		this.equipmentType = equipmentType;
+		return this;
 	}
 
 	public Double getWorkTimeH() {
 		return workTimeH;
 	}
 
-	public void setWorkTimeH(Double workTimeH) {
+	public EquipmentReportEntryDTO setWorkTimeH(Double workTimeH) {
 		this.workTimeH = workTimeH;
+		return this;
 	}
 
 	public String getFuelType() {
 		return fuelType;
 	}
 
-	public void setFuelType(String fuelType) {
+	public EquipmentReportEntryDTO setFuelType(String fuelType) {
 		this.fuelType = fuelType;
+		return this;
 	}
 
 }

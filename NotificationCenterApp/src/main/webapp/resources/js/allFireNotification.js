@@ -2,12 +2,19 @@ function editNotification(id){
     console.log('edit notification=' + id);
 }
 function showNotificationReports(id){
-    loadHtml("showPossibleReports.htm?notificationId=" + id, $("#div_holder"), 
+    loadHtml("showPossibleReports.htm?notificationId=" + id, $("#dropbox_holder"), 
         function(){
-            $("#div_holder").modal("show");
+            $("#possibleReportDropbox").modal("show");
         }
     );
+}
 
 
-
+function showReport(id){
+    loadHtml("viewReport.htm?id=" + id, $("#dropbox_holder"), 
+        function(){
+            $(".modal-backdrop").remove();
+            $("#reportViewDropbox").modal("show");
+        }
+    );
 }

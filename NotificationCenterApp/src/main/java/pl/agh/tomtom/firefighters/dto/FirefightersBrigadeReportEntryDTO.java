@@ -16,6 +16,8 @@ public class FirefightersBrigadeReportEntryDTO {
 
 	private Integer pumpWorktime;
 
+	private String tankSource;
+
 	public Long getId() {
 		return id;
 	}
@@ -72,4 +74,12 @@ public class FirefightersBrigadeReportEntryDTO {
 		this.pumpWorktime = pumpWorktime;
 	}
 
+	public FirefightersBrigadeReportEntryDTO setTankSource(String tankSource) {
+		this.tankSource = tankSource;
+		return this;
+	}
+
+	public String getTankSource() {
+		return tankSource;
+	}
 }

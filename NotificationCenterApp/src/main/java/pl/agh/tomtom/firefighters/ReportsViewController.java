@@ -1,6 +1,7 @@
 package pl.agh.tomtom.firefighters;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import pl.agh.tomtom.firefighters.dto.EquipmentReportEntryDTO;
 import pl.agh.tomtom.firefighters.dto.FireNotificationDTO;
-import pl.agh.tomtom.firefighters.dto.FireNotificationReportDTO;
+import pl.agh.tomtom.firefighters.dto.FirefighterReportEntryDTO;
+import pl.agh.tomtom.firefighters.dto.FirefightersBrigadeReportEntryDTO;
+import pl.agh.tomtom.firefighters.dto.FirefightersPostDTO;
 import pl.agh.tomtom.firefighters.dto.ReportDTO;
 import pl.agh.tomtom.firefighters.utils.AuthUtils;
 
@@ -29,25 +33,27 @@ public class ReportsViewController {
 		ModelAndView mav = FirefightersViewHelper
 				.createMAV("possibleReportsDropbox");
 		mav.addObject("notificationId", notificationId);
+		mav.addObject("possibleReports", getSampleData());
 
 		log.exit(mav);
 		return mav;
 	}
 
-	@RequestMapping(value = "/allReportsView.htm")
-	public ModelAndView allReportsView() {
+	@RequestMapping(method = RequestMethod.GET, value = "viewReport.htm")
+	public ModelAndView viewReport(@RequestParam Long id) {
 		log.entry();
 
-		ModelAndView mav = FirefightersViewHelper.createMAV("allReportsView");
-		List<FireNotificationReportDTO> data = getSampleData();
-		mav.addObject("actionReports", data);
+		ModelAndView mav = FirefightersViewHelper
+				.createMAV("viewReportDropbox");
+		mav.addObject("reportId", id);
+		mav.addObject("report", getSampleData().get(0));
 
 		log.exit(mav);
 		return mav;
 	}
 
-	private List<FireNotificationReportDTO> getSampleData() {
-		List<FireNotificationReportDTO> actionsReports = new ArrayList<FireNotificationReportDTO>();
+	private List<ReportDTO> getSampleData() {
+		List<ReportDTO> actionsReports = new ArrayList<ReportDTO>();
 
 		FireNotificationDTO notification1 = new FireNotificationDTO();
 		notification1.setAddress("Dabrawskiego");
@@ -60,10 +66,13 @@ public class ReportsViewController {
 		notification1.setActionState("FINISHED");
 		notification1.setType("Pozar lasu");
 
-		FireNotificationReportDTO actionReport1 = new FireNotificationReportDTO();
-		actionReport1.setNotification(notification1);
+		FirefightersPostDTO post = new FirefightersPostDTO();
+		post.setAddress("Rynek");
+		post.setCity("Zabno");
+		post.setCommunity("Zabno");
+		post.setName("OPS w Zabnie");
+
 		ReportDTO report1 = new ReportDTO();
-		actionReport1.addReport(report1);
 		report1.setCommunity("Zabno");
 		report1.setCreator(AuthUtils.getUserLogin());
 		report1.setObject("Stodola");
@@ -72,8 +81,32 @@ public class ReportsViewController {
 		report1.setSize(100.0);
 		report1.setOwner("Ziutek");
 		report1.setFireNotification(notification1);
+		report1.setFirefightersPost(post);
+		report1.setId(1L);
 
-		actionsReports.add(actionReport1);
+		FirefightersBrigadeReportEntryDTO fb1 = new FirefightersBrigadeReportEntryDTO();
+		fb1.setArrivalTime(new Date());
+		fb1.setDepartureTime(new Date());
+		fb1.setDistanceKM(10);
+		fb1.setId(2L);
+		fb1.setName("Janusze");
+		fb1.setPumpWorktime(0);
+		fb1.setMemberNumber(2);
+		fb1.setTankSource("Hydrant");
+		report1.setFirefightersBrigades(Collections.singletonList(fb1));
+
+		FirefighterReportEntryDTO fireman = new FirefighterReportEntryDTO()
+				.setFirstName("Janusz").setSurname("Sit").setId(1L);
+		report1.setFiremans(Collections.singletonList(fireman));
+
+		actionsReports.add(report1);
+		actionsReports.add(report1);
+
+		EquipmentReportEntryDTO eq = new EquipmentReportEntryDTO();
+		eq.setEquipmentType("Pompa wodna").setFuelType("Benzyna")
+				.setWorkTimeH(10.0).setId(10L);
+		report1.setEquipment(Collections.singletonList(eq));
+
 		return actionsReports;
 	}
 }

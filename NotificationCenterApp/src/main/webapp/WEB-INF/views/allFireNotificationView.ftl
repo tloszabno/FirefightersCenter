@@ -3,7 +3,7 @@
 <script src="resources/js/allFireNotification.js"></script>
  
 <@macros.pageTemplate>
-    <table class="table table-striped">
+    <table class="table table-striped ">
         <tr>
             <th>Id</th>
             <th>Typ</th>
@@ -32,4 +32,5 @@
     </table>
 
     <div id="dropbox_holder"></div>
+
 </@macros.pageTemplate>

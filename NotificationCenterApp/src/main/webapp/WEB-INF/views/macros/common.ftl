@@ -73,3 +73,25 @@
 </div>
 </#macro>
 
+
+<#macro modal_window id="" title="" onclose="" showSubmit=false onSubmit="" submitBtnText="" closeBtnText="Close" isLarge=false>
+<div class="modal fade " id="${id}" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog <#if isLarge==true>modal-lg</#if>">
+      <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"  onclick="${onclose}">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">${title}</h4>
+      </div>
+      <div class="modal-body">
+        <#nested>
+      </div>
+      <div class="modal-footer">
+        <#if showSubmit == true>
+          <button type="button" class="btn-save btn btn-primary"  onclick="${onSubmit}">${onSubmitText}</button>
+        </#if>
+          <button type="button" class="btn-cancel btn btn-default" data-dismiss="modal" onclick="${onclose}">${closeBtnText}</button>
+      </div>
+    </div>
+  </div>
+</div>
+</#macro>

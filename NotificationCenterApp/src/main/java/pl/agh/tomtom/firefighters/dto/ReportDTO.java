@@ -1,5 +1,6 @@
 package pl.agh.tomtom.firefighters.dto;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ReportDTO {
@@ -23,11 +24,14 @@ public class ReportDTO {
 
 	private String creator;
 
-	private List<EquipmentReportEntryDTO> equipment;
+	private List<EquipmentReportEntryDTO> equipment = //
+	Collections.emptyList();;
 
-	private List<FirefighterReportEntryDTO> firemans;
+	private List<FirefighterReportEntryDTO> firemans = //
+	Collections.emptyList();;
 
-	private List<FirefightersBrigadeReportEntryDTO> firefightersBrigades;
+	private List<FirefightersBrigadeReportEntryDTO> firefightersBrigades = //
+	Collections.emptyList();
 
 	public Long getId() {
 		return id;

@@ -11,24 +11,27 @@ public class FirefighterReportEntryDTO {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public FirefighterReportEntryDTO setId(Long id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public FirefighterReportEntryDTO setFirstName(String firstName) {
 		this.firstName = firstName;
+		return this;
 	}
 
 	public String getSurname() {
 		return surname;
 	}
 
-	public void setSurname(String surname) {
+	public FirefighterReportEntryDTO setSurname(String surname) {
 		this.surname = surname;
+		return this;
 	}
 
 }
