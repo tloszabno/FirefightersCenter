@@ -3,6 +3,8 @@ package pl.agh.tomtom.firefighters.dto;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class ReportDTO {
 	private Long id;
 
@@ -138,4 +140,8 @@ public class ReportDTO {
 		this.firefightersBrigades = firefightersBrigades;
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

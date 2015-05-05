@@ -2,6 +2,8 @@ package pl.agh.tomtom.firefighters.dto;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class FireNotificationDTO {
 
 	private Long id;
@@ -30,88 +32,103 @@ public class FireNotificationDTO {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public FireNotificationDTO setId(Long id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public FireNotificationDTO setType(String type) {
 		this.type = type;
+		return this;
 	}
 
 	public String getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public FireNotificationDTO setAddress(String address) {
 		this.address = address;
+		return this;
 	}
 
 	public String getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public FireNotificationDTO setCity(String city) {
 		this.city = city;
+		return this;
 	}
 
 	public Double getGpsXCoordinate() {
 		return gpsXCoordinate;
 	}
 
-	public void setGpsXCoordinate(Double gpsXCoordinate) {
+	public FireNotificationDTO setGpsXCoordinate(Double gpsXCoordinate) {
 		this.gpsXCoordinate = gpsXCoordinate;
+		return this;
 	}
 
 	public Double getGpsYCoordinate() {
 		return gpsYCoordinate;
 	}
 
-	public void setGpsYCoordinate(Double gpsYCoordinate) {
+	public FireNotificationDTO setGpsYCoordinate(Double gpsYCoordinate) {
 		this.gpsYCoordinate = gpsYCoordinate;
+		return this;
 	}
 
 	public String getActionState() {
 		return actionState;
 	}
 
-	public void setActionState(String actionState) {
+	public FireNotificationDTO setActionState(String actionState) {
 		this.actionState = actionState;
+		return this;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public FireNotificationDTO setDescription(String description) {
 		this.description = description;
+		return this;
 	}
 
 	public Date getNotificationDate() {
 		return notificationDate;
 	}
 
-	public void setNotificationDate(Date notificationDate) {
+	public FireNotificationDTO setNotificationDate(Date notificationDate) {
 		this.notificationDate = notificationDate;
+		return this;
 	}
 
 	public Date getFinishDate() {
 		return finishDate;
 	}
 
-	public void setFinishDate(Date finishDate) {
+	public FireNotificationDTO setFinishDate(Date finishDate) {
 		this.finishDate = finishDate;
+		return this;
 	}
 
 	public String getCreator() {
 		return creator;
 	}
 
-	public void setCreator(String creator) {
+	public FireNotificationDTO setCreator(String creator) {
 		this.creator = creator;
+		return this;
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

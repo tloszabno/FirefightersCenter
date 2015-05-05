@@ -2,6 +2,8 @@ package pl.agh.tomtom.firefighters.dto;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class FirefightersBrigadeReportEntryDTO {
 	private Long id;
 	private String name;
@@ -82,4 +84,10 @@ public class FirefightersBrigadeReportEntryDTO {
 	public String getTankSource() {
 		return tankSource;
 	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
+
 }

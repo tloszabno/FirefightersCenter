@@ -80,96 +80,109 @@ public class FireNotification implements Serializable {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public FireNotification setId(Long id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public FireNotification setType(String type) {
 		this.type = type;
+		return this;
 	}
 
 	public String getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public FireNotification setAddress(String address) {
 		this.address = address;
+		return this;
 	}
 
 	public String getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public FireNotification setCity(String city) {
 		this.city = city;
+		return this;
 	}
 
 	public Double getGpsXCoordinate() {
 		return gpsXCoordinate;
 	}
 
-	public void setGpsXCoordinate(Double gpsXCoordinate) {
+	public FireNotification setGpsXCoordinate(Double gpsXCoordinate) {
 		this.gpsXCoordinate = gpsXCoordinate;
+		return this;
 	}
 
 	public Double getGpsYCoordinate() {
 		return gpsYCoordinate;
 	}
 
-	public void setGpsYCoordinate(Double gpsYCoordinate) {
+	public FireNotification setGpsYCoordinate(Double gpsYCoordinate) {
 		this.gpsYCoordinate = gpsYCoordinate;
+		return this;
 	}
 
 	public String getActionState() {
 		return actionState;
 	}
 
-	public void setActionState(String actionState) {
+	public FireNotification setActionState(String actionState) {
 		this.actionState = actionState;
+		return this;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public FireNotification setDescription(String description) {
 		this.description = description;
+		return this;
 	}
 
 	public Date getNotificationDate() {
 		return notificationDate;
 	}
 
-	public void setNotificationDate(Date notificationDate) {
+	public FireNotification setNotificationDate(Date notificationDate) {
 		this.notificationDate = notificationDate;
+		return this;
 	}
 
 	public Date getFinishDate() {
 		return finishDate;
 	}
 
-	public void setFinishDate(Date finishDate) {
+	public FireNotification setFinishDate(Date finishDate) {
 		this.finishDate = finishDate;
+		return this;
 	}
 
 	public String getCreator() {
 		return creator;
 	}
 
-	public void setCreator(String creator) {
+	public FireNotification setCreator(String creator) {
 		this.creator = creator;
+		return this;
 	}
 
 	public List<FirefightersPost> getFirefightersPosts() {
 		return firefightersPosts;
 	}
 
-	public void setFirefightersPosts(List<FirefightersPost> firefightersPosts) {
+	public FireNotification setFirefightersPosts(
+			List<FirefightersPost> firefightersPosts) {
 		this.firefightersPosts = firefightersPosts;
+		return this;
 	}
 
 	@Override

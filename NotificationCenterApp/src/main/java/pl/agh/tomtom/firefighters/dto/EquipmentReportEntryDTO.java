@@ -1,5 +1,7 @@
 package pl.agh.tomtom.firefighters.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class EquipmentReportEntryDTO {
 	private Long id;
 
@@ -45,4 +47,8 @@ public class EquipmentReportEntryDTO {
 		return this;
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

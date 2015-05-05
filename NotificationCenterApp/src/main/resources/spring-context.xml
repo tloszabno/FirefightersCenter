@@ -56,5 +56,5 @@
 	<bean id="fireNotificationDAO" class="pl.agh.tomtom.firefighters.dao.FireNotificationDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>	
-
+	<bean id="fireNotificationService" class="pl.agh.tomtom.firefighters.services.FireNotificationServiceImpl"></bean>
 </beans>

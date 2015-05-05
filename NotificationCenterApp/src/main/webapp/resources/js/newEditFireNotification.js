@@ -28,13 +28,23 @@ $(document).ready(function() {
                 if (address.length > 0 && city.length > 0) {
                     gmapFasade.codeNotificationAddress(city + "," + address + ", POLAND");
                 }
+            },
+            saveNotification: function(){
+                $.ajax({
+                    type: "POST",
+                    url: "saveFireNotification",
+                    data: JSON.stringify(this.$data.notification),
+                    contentType: "application/json; charset=utf-8",
+                    success: function(e){ alert("Zapisano");  },
+                    error: function(e){ alert("Błąd");  }
+                });
             }
         }
     });
 
     var gmapFasade = new GmapFasade(notificationFormMVVM);
     gmapFasade.initialize();
-	gmapFasade.optimizeSize()
+    gmapFasade.optimizeSize()
     $(window).resize(gmapFasade.optimizeSize);
 
 });

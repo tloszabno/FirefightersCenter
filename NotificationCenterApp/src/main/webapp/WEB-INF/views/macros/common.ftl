@@ -20,7 +20,7 @@
             <button type="button" class="menu_element_btn btn btn-danger  navbar-btn" onclick="location.href='allFireNotification.htm'">${text.notifitacionBtnMsg}</button>
           </li>
           <li>
-            <button type="button" class="menu_element_btn btn btn-danger  navbar-btn" onclick="location.href='newFireNotication.htm'">${text.stationsBtnMsg}</button>
+            <button type="button" class="menu_element_btn btn btn-danger  navbar-btn" onclick="location.href='allFirefightersPosts.htm'">${text.stationsBtnMsg}</button>
           </li>
         </ul>
       </div>

@@ -5,10 +5,9 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
-public abstract class BaseDAO<BEAN extends Serializable, ID extends Serializable>
-		extends HibernateDaoSupport {
+public abstract class BaseDAO<BEAN extends Serializable, ID extends Serializable> extends HibernateDaoSupport {
 
 	private static final Logger log = LogManager.getLogger();
 
@@ -22,8 +21,7 @@ public abstract class BaseDAO<BEAN extends Serializable, ID extends Serializable
 		log.entry();
 
 		@SuppressWarnings("unchecked")
-		List<BEAN> result = (List<BEAN>) getHibernateTemplate().find(
-				"from " + classOfBEAN.getName());
+		List<BEAN> result = (List<BEAN>) getHibernateTemplate().find("from " + classOfBEAN.getName());
 
 		log.exit(result);
 		return result;

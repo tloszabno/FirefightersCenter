@@ -3,6 +3,8 @@ package pl.agh.tomtom.firefighters.dto;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class FireNotificationReportDTO {
 	private FireNotificationDTO notification;
 	private List<ReportDTO> reports = new LinkedList<ReportDTO>();
@@ -28,4 +30,8 @@ public class FireNotificationReportDTO {
 		return this;
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 }
