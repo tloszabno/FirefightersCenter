@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import pl.agh.tomtom.firefighters.dto.FirefightersPostCurrentDetailsDTO;
 import pl.agh.tomtom.firefighters.dto.FirefightersPostDTO;
 import pl.agh.tomtom.firefighters.exceptions.FireException;
 import pl.agh.tomtom.firefighters.services.FirefightersPostService;
@@ -63,4 +64,15 @@ public class FirefightersPostsController {
 		return "OK";
 	}
 
+	@RequestMapping(value = "getFirefightersPostDetails", method = RequestMethod.GET)
+	public ModelAndView getFirefightersPostDetails(Long id) throws FireException {
+		log.entry();
+
+		ModelAndView mav = new ModelAndView("firefightersPostDetails");
+		FirefightersPostCurrentDetailsDTO firefightersPostDTO = firefightersPostService.getCurrentDetails(id);
+		mav.addObject("post", firefightersPostDTO);
+
+		log.exit(mav);
+		return mav;
+	}
 }

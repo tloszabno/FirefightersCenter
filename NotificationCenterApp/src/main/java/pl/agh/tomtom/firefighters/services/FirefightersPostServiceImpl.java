@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pl.agh.tomtom.firefighters.assemblers.FirefightersPostAssembler;
 import pl.agh.tomtom.firefighters.dao.FirefightersPostDAO;
+import pl.agh.tomtom.firefighters.dto.FirefightersPostCurrentDetailsDTO;
 import pl.agh.tomtom.firefighters.dto.FirefightersPostDTO;
 import pl.agh.tomtom.firefighters.exceptions.FireException;
 import pl.agh.tomtom.firefighters.model.FirefightersPost;
@@ -59,4 +60,36 @@ public class FirefightersPostServiceImpl implements FirefightersPostService {
 		log.exit(posts);
 		return posts;
 	}
+
+	@Override
+	public FirefightersPostCurrentDetailsDTO getCurrentDetails(Long id) throws FireException {
+		log.entry();
+
+		FirefightersPostDTO firefightersPostDTO = get(id);
+
+		FirefightersPostCurrentDetailsDTO details = new FirefightersPostCurrentDetailsDTO();
+		details.setFirefightersPost(firefightersPostDTO);
+
+		// FIXME: connect to fire station post and get data, remove below
+		details.setAvailable(true).setAvailableUnits(2);
+
+		log.exit(details);
+		return details;
+	}
+
+	@Override
+	public FirefightersPostDTO get(Long id) throws FireException {
+		log.entry();
+
+		FirefightersPost firefightersPost = firefightersPostDAO.get(id);
+		if (firefightersPost == null) {
+			throw new FireException("Post with id=[" + id + "] not found");
+		}
+
+		FirefightersPostDTO dto = FirefightersPostAssembler.fromModel(firefightersPost);
+
+		log.exit(dto);
+		return dto;
+	}
+
 }

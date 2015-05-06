@@ -9,13 +9,15 @@ $(document).ready(function() {
             address: "",
             city: "",
             type: "",
-            description: ""
+            description: "",
+            firefightersPosts:[]
         },
         gmap: {
         	loadProgress : 0,
         	progressBarClass: "progress-bar-success",
         	progressBarMsg: ""
-        }
+        },
+        availableFirefightersPosts: []
     };
 
     var notificationFormMVVM = new Vue({
@@ -38,12 +40,27 @@ $(document).ready(function() {
                     success: function(e){ alert("Zapisano"); refreshPage();  },
                     error: function(e){ alert("Błąd");  }
                 });
+            },
+            removePostFromNotification: function(i,e){
+                var posts = this.$data.notification.firefightersPosts;
+                if( i > -1){
+                    posts.splice(i, 1);
+                }
             }
         }
     });
+    window.notificationFormMVVM = notificationFormMVVM;
 
     var gmapFasade = new GmapFasade(notificationFormMVVM);
     gmapFasade.initialize();
+
+
+   $.getJSON("getAllFirefightersPosts", function(gotData){
+        data.availableFirefightersPosts = gotData;    
+        gmapFasade.addFirefightersPosts(gotData);        
+    });
+
+
     gmapFasade.optimizeSize()
     $(window).resize(gmapFasade.optimizeSize);
 

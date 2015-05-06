@@ -45,17 +45,27 @@
                 <label for="description">Opis</label>
                 <textarea class="form-control" v-model="notification.description" id="description" rows="4" placeholder="Opis"></textarea>
             </div>
+            <div class="form-group">
+                <label for="selectedPosts">Wybrane posterunki</label>
+                <table class="table table-stripped" id="selectedPosts">
+                    <tr v-repeat="notification.firefightersPosts">
+                        <td>{{name}}</td>
+                        <td>{{address}}</td>
+                        <td>{{city}}</td>
+                        <td><button class="btn btn-danger  btn-xs" v-on="click: removePostFromNotification($index, $event)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+                    </tr>
+                </table>
+            </div>
             <div class="progress">
                 <div class="progress-bar {{gmap.progressBarClass}}" role="progressbar" aria-valuenow="{{gmaps.loadProgress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{gmap.loadProgress}}%">
                     {{gmap.progressBarMsg}}
                 </div>
             </div>
-
         </form>
         <button class="btn btn-danger btn-lg" v-on="click: saveNotification"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>&nbsp; Zapisz zgloszenie</button>
     </div>
     <div id="map-canvas" class="mapContainer"></div>
-
+    
 </div> 
 
 
