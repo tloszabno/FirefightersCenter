@@ -34,7 +34,7 @@ $(document).ready(function() {
                         url: "saveFirefightersPosts",
                         data: JSON.stringify(this.$data.posts),
                         contentType: "application/json; charset=utf-8",
-                        success: function(e){ alert("Zapisano");  },
+                        success: function(e){ alert("Zapisano"); refreshPage();  },
                         error: function(e){ alert("Błąd");  }
                     });
                 }

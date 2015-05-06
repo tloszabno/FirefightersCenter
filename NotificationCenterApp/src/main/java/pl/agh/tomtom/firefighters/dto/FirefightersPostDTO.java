@@ -19,48 +19,54 @@ public class FirefightersPostDTO {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public FirefightersPostDTO setId(Long id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public FirefightersPostDTO setName(String name) {
 		this.name = name;
+		return this;
 	}
 
 	public String getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public FirefightersPostDTO setAddress(String address) {
 		this.address = address;
+		return this;
 	}
 
 	public String getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public FirefightersPostDTO setCity(String city) {
 		this.city = city;
+		return this;
 	}
 
 	public String getCommunity() {
 		return community;
 	}
 
-	public void setCommunity(String community) {
+	public FirefightersPostDTO setCommunity(String community) {
 		this.community = community;
+		return this;
 	}
 
 	public String getSystemIpAddress() {
 		return systemIpAddress;
 	}
 
-	public void setSystemIpAddress(String systemIpAddress) {
+	public FirefightersPostDTO setSystemIpAddress(String systemIpAddress) {
 		this.systemIpAddress = systemIpAddress;
+		return this;
 	}
 
 	@Override

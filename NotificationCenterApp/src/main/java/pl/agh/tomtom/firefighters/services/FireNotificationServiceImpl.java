@@ -31,7 +31,7 @@ public class FireNotificationServiceImpl implements FireNotificationService {
 		if (id != null) {
 			fireNotification = fireNotificationDAO.get(id);
 			if (fireNotification == null) {
-				throw new FireException("Notification iwth id=[" + id + "] not found");
+				throw new FireException("Notification with id=[" + id + "] not found");
 			}
 		} else {
 			fireNotification = new FireNotification();

@@ -35,7 +35,7 @@ $(document).ready(function() {
                     url: "saveFireNotification",
                     data: JSON.stringify(this.$data.notification),
                     contentType: "application/json; charset=utf-8",
-                    success: function(e){ alert("Zapisano");  },
+                    success: function(e){ alert("Zapisano"); refreshPage();  },
                     error: function(e){ alert("Błąd");  }
                 });
             }
