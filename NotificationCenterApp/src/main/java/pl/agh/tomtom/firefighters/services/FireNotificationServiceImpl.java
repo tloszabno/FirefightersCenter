@@ -37,6 +37,7 @@ public class FireNotificationServiceImpl implements FireNotificationService {
 			fireNotification = new FireNotification();
 		}
 
+		// FIXME: append fire post offices, but not i normal convertion !!!
 		FireNotificationAssembler.fillModelWithDTO(fireNotification, notificationDTO);
 
 		fireNotificationDAO.saveOrUpdate(fireNotification);
@@ -54,5 +55,19 @@ public class FireNotificationServiceImpl implements FireNotificationService {
 
 		log.exit(dtos);
 		return dtos;
+	}
+
+	@Override
+	public FireNotificationDTO get(Long id) throws FireException {
+		log.entry(id);
+
+		FireNotification fireNotification = fireNotificationDAO.get(id);
+		if (fireNotification == null) {
+			throw new FireException("Fire Notification with id=[" + id + "] not found");
+		}
+		FireNotificationDTO dto = FireNotificationAssembler.fromModel(fireNotification);
+
+		log.exit(dto);
+		return dto;
 	}
 }

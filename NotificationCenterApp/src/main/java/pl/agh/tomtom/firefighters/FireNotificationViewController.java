@@ -6,8 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import pl.agh.tomtom.firefighters.dto.FireNotificationDTO;
+import pl.agh.tomtom.firefighters.exceptions.FireException;
 import pl.agh.tomtom.firefighters.services.FireNotificationService;
 
 @Controller
@@ -50,5 +55,16 @@ public class FireNotificationViewController {
 
 		log.exit(mav);
 		return mav;
+	}
+
+	@RequestMapping(value = "getNotification", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public FireNotificationDTO getNotification(@RequestParam Long id) throws FireException {
+		log.entry(id);
+
+		FireNotificationDTO fireNotificationDTO = fireNotificationService.get(id);
+
+		log.exit(fireNotificationDTO);
+		return fireNotificationDTO;
 	}
 }

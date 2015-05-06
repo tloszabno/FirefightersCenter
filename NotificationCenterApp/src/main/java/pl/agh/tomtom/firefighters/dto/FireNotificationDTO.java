@@ -1,6 +1,7 @@
 package pl.agh.tomtom.firefighters.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -27,6 +28,8 @@ public class FireNotificationDTO {
 	private Date finishDate;
 
 	private String creator;
+
+	private List<FirefightersPostDTO> firefightersPosts;
 
 	public Long getId() {
 		return id;
@@ -125,6 +128,15 @@ public class FireNotificationDTO {
 	public FireNotificationDTO setCreator(String creator) {
 		this.creator = creator;
 		return this;
+	}
+
+	public FireNotificationDTO setFirefightersPosts(List<FirefightersPostDTO> firefightersPosts) {
+		this.firefightersPosts = firefightersPosts;
+		return this;
+	}
+
+	public List<FirefightersPostDTO> getFirefightersPosts() {
+		return firefightersPosts;
 	}
 
 	@Override

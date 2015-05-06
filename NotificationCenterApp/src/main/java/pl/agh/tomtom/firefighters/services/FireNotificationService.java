@@ -6,8 +6,9 @@ import pl.agh.tomtom.firefighters.dto.FireNotificationDTO;
 import pl.agh.tomtom.firefighters.exceptions.FireException;
 
 public interface FireNotificationService {
-	public void saveFireNotification(FireNotificationDTO notificationDTO)
-			throws FireException;
+	public void saveFireNotification(FireNotificationDTO notificationDTO) throws FireException;
 
 	public List<FireNotificationDTO> getAllNotifications();
+
+	public FireNotificationDTO get(Long id) throws FireException;
 }

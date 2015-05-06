@@ -1,5 +1,5 @@
 function editNotification(id){
-    console.log('edit notification=' + id);
+    location.href="newFireNotication.htm?id=" + id;
 }
 function showNotificationReports(id){
     loadHtml("showPossibleReports.htm?notificationId=" + id, $("#dropbox_holder"), 

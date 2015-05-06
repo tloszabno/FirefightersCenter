@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
     var data = {
         notification: {
             id: null,
@@ -55,13 +56,24 @@ $(document).ready(function() {
     gmapFasade.initialize();
 
 
-   $.getJSON("getAllFirefightersPosts", function(gotData){
+    $.getJSON("getAllFirefightersPosts", function(gotData){
         data.availableFirefightersPosts = gotData;    
         gmapFasade.addFirefightersPosts(gotData);        
     });
 
-
     gmapFasade.optimizeSize()
     $(window).resize(gmapFasade.optimizeSize);
+
+    var isEdit = $("#isEdit").val() == "true";
+    console.log("isEdit=" + isEdit);
+    if( isEdit == true ){
+        var editId = $("#editNotificationId").val();
+        $.getJSON("getNotification?id="+ editId, function(gotData){
+            data.notification = gotData;
+        });
+
+    }
+
+
 
 });

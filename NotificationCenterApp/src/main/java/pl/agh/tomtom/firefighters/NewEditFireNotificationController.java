@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,10 +26,13 @@ public class NewEditFireNotificationController {
 	private FireNotificationService fireNotificationService;
 
 	@RequestMapping(value = "/newFireNotication.htm", method = RequestMethod.GET)
-	public ModelAndView newFireNotification() {
+	public ModelAndView newFireNotification(@RequestParam(required = false) Long id) {
 		log.entry();
 
 		ModelAndView model = FirefightersViewHelper.createMAV("newEditFireNotication");
+
+		model.addObject("isEdit", Boolean.toString(id != null));
+		model.addObject("editNotificationId", id);
 
 		log.exit();
 		return model;
@@ -44,4 +48,5 @@ public class NewEditFireNotificationController {
 		log.exit();
 		return "OK";
 	}
+
 }
