@@ -27,8 +27,11 @@ apply plugin: 'spring-boot'
 dependencies {
     compile 'org.apache.logging.log4j:log4j-core:2.2'
     compile 'org.apache.logging.log4j:log4j-api:2.2'
-
     compile 'org.springframework.boot:spring-boot-starter-web:1.2.3.RELEASE'
+    compile 'org.springframework:spring-orm:4.1.4.RELEASE'
+    compile 'org.xerial:sqlite-jdbc:3.7.2'
+    compile 'org.hibernate:hibernate-core:4.3.8.Final'
+
 
     testCompile 'junit:junit:4.11'
 }

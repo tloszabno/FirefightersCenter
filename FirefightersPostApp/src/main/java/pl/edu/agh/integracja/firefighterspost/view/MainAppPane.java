@@ -67,7 +67,7 @@ public class MainAppPane implements AlertListener {
     public void onAlertReceive(String message) {
         Platform.runLater(() -> {
             confirmAlertBtn.setDisable(false);
-            alarmReceivedLbl.setText("ALARM: " + message);
+            alarmReceivedLbl.setText("Received Alarm: " + message);
             confirmationTxt.setText("");
         });
 
