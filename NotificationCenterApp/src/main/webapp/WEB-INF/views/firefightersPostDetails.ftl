@@ -19,10 +19,18 @@
                 <span>${post.availableUnits!}</span>
             </td>
         </tr>
+        <#list post.equipmentInfo as eqInfo>
+        <tr class="equipmentInfo">
+            <td><span class="equipmentName">${eqInfo.equipmentName}</span> (${eqInfo.count})</td>
+            <td>
+                <input class="equipmentCount" type="number" min="0" max="${eqInfo.count}" value="0">
+            </td>
+        </tr>
+        </#list>
+
 
     </table>
 
-    Uzupelnic reszte danych, dodac inputy itd <br/>
 
     <button class="btn btn-primary" v-on="click: addFirefightersPost">Dodaj do akcji</button>
 </div>

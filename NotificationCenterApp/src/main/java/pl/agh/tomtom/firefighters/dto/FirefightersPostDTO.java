@@ -1,5 +1,8 @@
 package pl.agh.tomtom.firefighters.dto;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class FirefightersPostDTO {
@@ -14,6 +17,8 @@ public class FirefightersPostDTO {
 	private String community;
 
 	private String systemIpAddress;
+
+	private List<PostEquipmentInfo> equipmentInfo = Collections.emptyList();
 
 	public Long getId() {
 		return id;
@@ -67,6 +72,14 @@ public class FirefightersPostDTO {
 	public FirefightersPostDTO setSystemIpAddress(String systemIpAddress) {
 		this.systemIpAddress = systemIpAddress;
 		return this;
+	}
+
+	public void setEquipmentInfo(List<PostEquipmentInfo> equipmentInfo) {
+		this.equipmentInfo = equipmentInfo;
+	}
+
+	public List<PostEquipmentInfo> getEquipmentInfo() {
+		return equipmentInfo;
 	}
 
 	@Override

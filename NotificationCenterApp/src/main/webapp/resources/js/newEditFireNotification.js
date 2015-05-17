@@ -38,7 +38,7 @@ $(document).ready(function() {
                     url: "saveFireNotification",
                     data: JSON.stringify(this.$data.notification),
                     contentType: "application/json; charset=utf-8",
-                    success: function(e){ alert("Zapisano"); refreshPage();  },
+                    success: function(e){ alert("Zapisano"); location.href='newFireNotication.htm';  },
                     error: function(e){ alert("Błąd");  }
                 });
             },
@@ -65,11 +65,18 @@ $(document).ready(function() {
     $(window).resize(gmapFasade.optimizeSize);
 
     var isEdit = $("#isEdit").val() == "true";
-    console.log("isEdit=" + isEdit);
     if( isEdit == true ){
         var editId = $("#editNotificationId").val();
         $.getJSON("getNotification?id="+ editId, function(gotData){
             data.notification = gotData;
+
+
+                var address = gotData.address;
+                var city = gotData.city;
+
+                if (address.length > 0 && city.length > 0) {
+                    gmapFasade.codeNotificationAddress(city + "," + address + ", POLAND");
+                }
         });
 
     }
@@ -77,3 +84,4 @@ $(document).ready(function() {
 
 
 });
+

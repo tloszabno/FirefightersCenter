@@ -1,5 +1,6 @@
 package pl.agh.tomtom.firefighters.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import pl.agh.tomtom.firefighters.assemblers.FirefightersPostAssembler;
 import pl.agh.tomtom.firefighters.dao.FirefightersPostDAO;
 import pl.agh.tomtom.firefighters.dto.FirefightersPostCurrentDetailsDTO;
 import pl.agh.tomtom.firefighters.dto.FirefightersPostDTO;
+import pl.agh.tomtom.firefighters.dto.PostEquipmentInfo;
 import pl.agh.tomtom.firefighters.exceptions.FireException;
 import pl.agh.tomtom.firefighters.model.FirefightersPost;
 
@@ -72,6 +74,12 @@ public class FirefightersPostServiceImpl implements FirefightersPostService {
 
 		// FIXME: connect to fire station post and get data, remove below
 		details.setAvailable(true).setAvailableUnits(2);
+
+		List<PostEquipmentInfo> availableEqipment = new ArrayList<PostEquipmentInfo>();
+		availableEqipment.add(new PostEquipmentInfo().setEquipmentName("drabina").setCount(3));
+		availableEqipment.add(new PostEquipmentInfo().setEquipmentName("helikopter").setCount(1));
+		availableEqipment.add(new PostEquipmentInfo().setEquipmentName("pompa glebinowa").setCount(1));
+		details.setEquipmentInfo(availableEqipment);
 
 		log.exit(details);
 		return details;

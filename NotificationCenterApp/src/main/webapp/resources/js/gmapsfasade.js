@@ -159,7 +159,18 @@ function GmapFasade(notificationFormMVVM){
                     for(var i=0; i < availablePosts.length; i++){
                         var v = availablePosts[i];
                         if( v.id == data.id ){
-                            console.log('added');
+                            // add selected equipment
+                            $(".equipmentInfo").each(function(idx){
+                                var eqName = $(this).find(".equipmentName").text();
+                                var eqCount = $(this).find(".equipmentCount").val();
+
+                                var eqInfo = {
+                                    equipmentName: eqName,
+                                    count: eqCount
+                                }
+                                v.equipmentInfo.push(eqInfo);
+
+                            });
                             var arr = notificationFormMVVM.$data.notification.firefightersPosts;
                             arr.push(v);      
                             //append some values to v

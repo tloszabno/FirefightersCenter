@@ -1,5 +1,6 @@
 package pl.agh.tomtom.firefighters.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,9 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pl.agh.tomtom.firefighters.assemblers.FireNotificationAssembler;
 import pl.agh.tomtom.firefighters.dao.FireNotificationDAO;
+import pl.agh.tomtom.firefighters.dao.FirefightersPostDAO;
 import pl.agh.tomtom.firefighters.dto.FireNotificationDTO;
+import pl.agh.tomtom.firefighters.dto.FirefightersPostDTO;
 import pl.agh.tomtom.firefighters.exceptions.FireException;
 import pl.agh.tomtom.firefighters.model.FireNotification;
+import pl.agh.tomtom.firefighters.model.FirefightersPost;
+import pl.agh.tomtom.firefighters.remote.FireNotificationNotifier;
 
 @Transactional(propagation = Propagation.REQUIRED)
 public class FireNotificationServiceImpl implements FireNotificationService {
@@ -22,12 +27,32 @@ public class FireNotificationServiceImpl implements FireNotificationService {
 	@Autowired
 	private FireNotificationDAO fireNotificationDAO;
 
+	@Autowired
+	private FirefightersPostDAO firefightersPostDAO;
+
+	@Autowired
+	private FireNotificationNotifier fireNotificationNotifier;
+
 	@Override
 	public void saveFireNotification(FireNotificationDTO notificationDTO) throws FireException {
 		log.entry(notificationDTO);
 
 		Long id = notificationDTO.getId();
-		FireNotification fireNotification = null;
+		FireNotification fireNotification = resolveNewOrExistiongNotification(id);
+
+		FireNotificationAssembler.fillModelWithDTO(fireNotification, notificationDTO);
+
+		appendPosts(notificationDTO, fireNotification);
+
+		fireNotificationDAO.saveOrUpdate(fireNotification);
+
+		sentNotifications(notificationDTO);
+
+		log.exit();
+	}
+
+	private FireNotification resolveNewOrExistiongNotification(Long id) throws FireException {
+		FireNotification fireNotification;
 		if (id != null) {
 			fireNotification = fireNotificationDAO.get(id);
 			if (fireNotification == null) {
@@ -36,13 +61,23 @@ public class FireNotificationServiceImpl implements FireNotificationService {
 		} else {
 			fireNotification = new FireNotification();
 		}
+		return fireNotification;
+	}
 
-		// FIXME: append fire post offices, but not i normal convertion !!!
-		FireNotificationAssembler.fillModelWithDTO(fireNotification, notificationDTO);
+	private void sentNotifications(FireNotificationDTO notificationDTO) throws FireException {
+		for (FirefightersPostDTO post : notificationDTO.getFirefightersPosts()) {
+			this.fireNotificationNotifier.sendNotification(notificationDTO, post);
+		}
+	}
 
-		fireNotificationDAO.saveOrUpdate(fireNotification);
-
-		log.exit();
+	private void appendPosts(FireNotificationDTO notificationDTO, FireNotification fireNotification) {
+		List<FirefightersPost> firefightersPostsModel = new ArrayList<FirefightersPost>();
+		for (FirefightersPostDTO postDTO : notificationDTO.getFirefightersPosts()) {
+			Long postId = postDTO.getId();
+			FirefightersPost model = firefightersPostDAO.get(postId);
+			firefightersPostsModel.add(model);
+		}
+		fireNotification.setFirefightersPosts(firefightersPostsModel);
 	}
 
 	@Override

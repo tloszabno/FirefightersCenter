@@ -1,5 +1,6 @@
 package pl.agh.tomtom.firefighters.dto;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class FireNotificationDTO {
 
 	private String creator;
 
-	private List<FirefightersPostDTO> firefightersPosts;
+	private List<FirefightersPostDTO> firefightersPosts = Collections.emptyList();
 
 	public Long getId() {
 		return id;
