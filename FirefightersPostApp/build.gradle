@@ -36,7 +36,7 @@ dependencies {
 
   // Required if generating equals, hashCode, or toString methods
   compile 'commons-lang:commons-lang:2.6'
-  // Required if generating JSR-303 annotations
+  // Required if generating0000-303 annotations
   compile 'javax.validation:validation-api:1.1.0.CR2'
   // Required if generating Jackson 2 annotations
   compile 'com.fasterxml.jackson.core:jackson-databind:2.1.4'
@@ -57,7 +57,6 @@ sourceSets {
 }
 
 task cleanGenerated {
-  println "CLEAN"
   delete "src/main/generated"
 }
 
@@ -84,7 +83,7 @@ jsonSchema2Pojo {
 
   // Package name used for generated Java classes (for types where a fully qualified name has not
   // been supplied in the schema using the 'javaType' property).
-  targetPackage = 'pl.generated.json'
+  targetPackage = 'pl.edu.agh.integracja.common.dto'
 
   // The characters that should be considered as word delimiters when creating Java Bean property
   // names from JSON property names. If blank or not set, JSON properties will be considered to

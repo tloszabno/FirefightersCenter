@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Send from notification center to firefightersPost",
+  "description": "RS from firefightersPost",
   "id": "/",
   "type": "object",
   "properties": {

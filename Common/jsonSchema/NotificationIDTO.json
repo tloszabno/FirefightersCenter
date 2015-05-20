@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "id": "http://integracja.firefighters.ki.agh.edu.pl",
-  "description": "Send from firefightersPost to notification center",
+  "description": "RQ to notification center: confirm/finish notification",
   "type": "object",
   "properties": {
     "id": {
