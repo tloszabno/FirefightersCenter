@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Send from notification center to firefightersPost",
+  "id": "/",
+  "type": "object",
+  "properties": {
+    "availableEquipment": {
+      "type": "array",
+      "items":
+        {
+          "id": "0",
+          "type": "object",
+          "properties": {
+            "name": {
+              "id": "name",
+              "type": "string",
+              "minLength": 1
+            },
+            "quantity": {
+              "id": "quantity",
+              "type": "integer"
+            }
+          },
+          "additionalProperties": false
+        }
+      ,
+      "additionalItems": false
+    },
+    "availableUnits": {
+      "id": "availableUnits",
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false
+}

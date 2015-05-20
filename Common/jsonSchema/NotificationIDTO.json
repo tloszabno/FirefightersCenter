@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://integracja.firefighters.ki.agh.edu.pl",
+  "description": "Send from firefightersPost to notification center",
+  "type": "object",
+  "properties": {
+    "id": {
+      "id": "http://integracja.firefighters.ki.agh.edu.pl/id",
+      "type": "string"
+    },
+    "state": {
+      "id": "http://integracja.firefighters.ki.agh.edu.pl/state",
+      "type": "string",
+      "enum": ["CONFIRMED", "FINISHED"]
+    }
+  },
+  "additionalProperties": false
+}
