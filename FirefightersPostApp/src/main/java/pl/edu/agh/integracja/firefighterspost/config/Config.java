@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pl.edu.agh.integracja.firefighterspost.dao.AlertDao;
 import pl.edu.agh.integracja.firefighterspost.dao.CurrentStateDao;
+import pl.edu.agh.integracja.firefighterspost.dao.DummyDataProvider;
 import pl.edu.agh.integracja.firefighterspost.handler.GetCurrentStateHandler;
 import pl.edu.agh.integracja.firefighterspost.handler.PostFireNotificationHandler;
 import pl.edu.agh.integracja.firefighterspost.translator.AlertTranslator;
@@ -43,6 +44,11 @@ public class Config {
   @Bean(name = "alertTranslator")
   public AlertTranslator alertTranslator() {
     return new AlertTranslator();
+  }
+
+  @Bean(name = "dummyDataProvider")
+  public DummyDataProvider dummyDataProvider(){
+    return new DummyDataProvider();
   }
 
   @Bean(name = "mainAppPane")
