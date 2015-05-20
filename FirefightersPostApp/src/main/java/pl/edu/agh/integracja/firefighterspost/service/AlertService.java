@@ -1,9 +1,9 @@
 package pl.edu.agh.integracja.firefighterspost.service;
 
 import org.apache.log4j.Logger;
+import pl.edu.agh.integracja.common.dto.FireNotificationIDTO;
 import pl.edu.agh.integracja.firefighterspost.dao.AlertDao;
 import pl.edu.agh.integracja.firefighterspost.db.dto.AlertNotificationDbDto;
-import pl.edu.agh.integracja.firefighterspost.rest.dto.AlertNotificationRestDto;
 import pl.edu.agh.integracja.firefighterspost.translator.AlertTranslator;
 import pl.edu.agh.integracja.firefighterspost.view.AlertListener;
 
@@ -22,11 +22,11 @@ public class AlertService {
   @Resource(name = "alertTranslator")
   private AlertTranslator alertTranslator;
 
-  public void performAlarm(AlertNotificationRestDto alertRestDto) {
+  public void performAlarm(FireNotificationIDTO alertRestDto) {
     AlertNotificationDbDto alertNotificationDbDto = alertTranslator.fromRestToDbModel(alertRestDto);
     alertDao.storeAlert(alertNotificationDbDto);
-    alertListener.onAlertReceive(alertRestDto.getName());
-    LOG.info("ALARM: " + alertRestDto.getName());
+    alertListener.onAlertReceive(alertRestDto.getActionName());
+    LOG.info("ALARM: " + alertRestDto.getActionName());
     LOG.info(alertRestDto);
 
   }

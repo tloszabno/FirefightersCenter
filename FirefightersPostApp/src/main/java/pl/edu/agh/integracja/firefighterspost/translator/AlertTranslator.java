@@ -1,13 +1,13 @@
 package pl.edu.agh.integracja.firefighterspost.translator;
 
+import pl.edu.agh.integracja.common.dto.FireNotificationIDTO;
 import pl.edu.agh.integracja.firefighterspost.db.dto.AlertNotificationDbDto;
-import pl.edu.agh.integracja.firefighterspost.rest.dto.AlertNotificationRestDto;
 
 public class AlertTranslator {
 
-  public AlertNotificationDbDto fromRestToDbModel(AlertNotificationRestDto restDto) {
+  public AlertNotificationDbDto fromRestToDbModel(FireNotificationIDTO restDto) {
     AlertNotificationDbDto dbDto = new AlertNotificationDbDto();
-    dbDto.setName(restDto.getName());
+    dbDto.setName(restDto.getActionName());
 
     return dbDto;
 
