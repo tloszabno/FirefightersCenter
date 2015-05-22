@@ -1,26 +1,26 @@
 
-package generated.pl.edu.agh.integracja.common.dto;
+package generated.integracja.common.dto;
 
 import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({
     "name",
-    "surname"
+    "quantity"
 })
-public class Firefighter {
+public class AvailableEquipment {
 
     @JsonProperty("name")
     private String name;
-    @JsonProperty("surname")
-    private String surname;
+    @JsonProperty("quantity")
+    private Integer quantity;
 
     /**
      * 
@@ -42,7 +42,7 @@ public class Firefighter {
         this.name = name;
     }
 
-    public Firefighter withName(String name) {
+    public AvailableEquipment withName(String name) {
         this.name = name;
         return this;
     }
@@ -50,25 +50,25 @@ public class Firefighter {
     /**
      * 
      * @return
-     *     The surname
+     *     The quantity
      */
-    @JsonProperty("surname")
-    public String getSurname() {
-        return surname;
+    @JsonProperty("quantity")
+    public Integer getQuantity() {
+        return quantity;
     }
 
     /**
      * 
-     * @param surname
-     *     The surname
+     * @param quantity
+     *     The quantity
      */
-    @JsonProperty("surname")
-    public void setSurname(String surname) {
-        this.surname = surname;
+    @JsonProperty("quantity")
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public Firefighter withSurname(String surname) {
-        this.surname = surname;
+    public AvailableEquipment withQuantity(Integer quantity) {
+        this.quantity = quantity;
         return this;
     }
 
@@ -79,7 +79,7 @@ public class Firefighter {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(name).append(surname).toHashCode();
+        return new HashCodeBuilder().append(name).append(quantity).toHashCode();
     }
 
     @Override
@@ -87,11 +87,11 @@ public class Firefighter {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Firefighter) == false) {
+        if ((other instanceof AvailableEquipment) == false) {
             return false;
         }
-        Firefighter rhs = ((Firefighter) other);
-        return new EqualsBuilder().append(name, rhs.name).append(surname, rhs.surname).isEquals();
+        AvailableEquipment rhs = ((AvailableEquipment) other);
+        return new EqualsBuilder().append(name, rhs.name).append(quantity, rhs.quantity).isEquals();
     }
 
 }
