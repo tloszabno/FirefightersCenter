@@ -18,7 +18,21 @@ public class FirefightersPostDTO {
 
 	private String systemIpAddress;
 
+	private boolean confirmation = true;
+
+	// used only for gui
+	@Deprecated
+	private boolean canDelete = false;
+
 	private List<PostEquipmentInfo> equipmentInfo = Collections.emptyList();
+
+	public boolean isConfirmation() {
+		return confirmation;
+	}
+
+	public void setConfirmation(boolean confirmation) {
+		this.confirmation = confirmation;
+	}
 
 	public Long getId() {
 		return id;
@@ -80,6 +94,16 @@ public class FirefightersPostDTO {
 
 	public List<PostEquipmentInfo> getEquipmentInfo() {
 		return equipmentInfo;
+	}
+
+	@Deprecated
+	public boolean isCanDelete() {
+		return canDelete;
+	}
+
+	@Deprecated
+	public void setCanDelete(boolean canDelete) {
+		this.canDelete = canDelete;
 	}
 
 	@Override

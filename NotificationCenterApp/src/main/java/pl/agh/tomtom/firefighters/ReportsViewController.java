@@ -23,15 +23,13 @@ import pl.agh.tomtom.firefighters.utils.AuthUtils;
 
 @Controller
 public class ReportsViewController {
-	private static final Logger log = LogManager
-			.getLogger(ReportsViewController.class);
+	private static final Logger log = LogManager.getLogger(ReportsViewController.class);
 
 	@RequestMapping(method = RequestMethod.GET, value = "showPossibleReports.htm")
 	public ModelAndView showPossibleReports(@RequestParam Long notificationId) {
 		log.entry();
 
-		ModelAndView mav = FirefightersViewHelper
-				.createMAV("possibleReportsDropbox");
+		ModelAndView mav = FirefightersViewHelper.createMAV("possibleReportsDropbox");
 		mav.addObject("notificationId", notificationId);
 		mav.addObject("possibleReports", getSampleData());
 
@@ -43,8 +41,7 @@ public class ReportsViewController {
 	public ModelAndView viewReport(@RequestParam Long id) {
 		log.entry();
 
-		ModelAndView mav = FirefightersViewHelper
-				.createMAV("viewReportDropbox");
+		ModelAndView mav = FirefightersViewHelper.createMAV("viewReportDropbox");
 		mav.addObject("reportId", id);
 		mav.addObject("report", getSampleData().get(0));
 
@@ -78,7 +75,7 @@ public class ReportsViewController {
 		report1.setObject("Stodola");
 		report1.setNotificationType("Wezwanie");
 		report1.setOtherDamage("Pekla opona");
-		report1.setSize(100.0);
+		report1.setSize("100.0");
 		report1.setOwner("Ziutek");
 		report1.setFireNotification(notification1);
 		report1.setFirefightersPost(post);
@@ -95,16 +92,15 @@ public class ReportsViewController {
 		fb1.setTankSource("Hydrant");
 		report1.setFirefightersBrigades(Collections.singletonList(fb1));
 
-		FirefighterReportEntryDTO fireman = new FirefighterReportEntryDTO()
-				.setFirstName("Janusz").setSurname("Sit").setId(1L);
+		FirefighterReportEntryDTO fireman = new FirefighterReportEntryDTO().setFirstName("Janusz").setSurname("Sit")
+				.setId(1L);
 		report1.setFiremans(Collections.singletonList(fireman));
 
 		actionsReports.add(report1);
 		actionsReports.add(report1);
 
 		EquipmentReportEntryDTO eq = new EquipmentReportEntryDTO();
-		eq.setEquipmentType("Pompa wodna").setFuelType("Benzyna")
-				.setWorkTimeH(10.0).setId(10L);
+		eq.setEquipmentType("Pompa wodna").setFuelType("Benzyna").setWorkTimeH(10.0).setId(10L);
 		report1.setEquipment(Collections.singletonList(eq));
 
 		return actionsReports;

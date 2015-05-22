@@ -16,7 +16,7 @@ public class ReportDTO {
 
 	private String community;
 
-	private Double size;
+	private String size;
 
 	private String object;
 
@@ -75,11 +75,11 @@ public class ReportDTO {
 		this.community = community;
 	}
 
-	public Double getSize() {
+	public String getSize() {
 		return size;
 	}
 
-	public void setSize(Double size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 
@@ -135,8 +135,7 @@ public class ReportDTO {
 		return firefightersBrigades;
 	}
 
-	public void setFirefightersBrigades(
-			List<FirefightersBrigadeReportEntryDTO> firefightersBrigades) {
+	public void setFirefightersBrigades(List<FirefightersBrigadeReportEntryDTO> firefightersBrigades) {
 		this.firefightersBrigades = firefightersBrigades;
 	}
 

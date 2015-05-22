@@ -52,7 +52,17 @@
                         <td>{{name}}</td>
                         <td>{{address}}</td>
                         <td>{{city}}</td>
-                        <td><button class="btn btn-danger  btn-xs" v-on="click: removePostFromNotification($index, $event)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+                        <template  v-if="canDelete">
+                            <td><button class="btn btn-danger  btn-xs" v-on="click: removePostFromNotification($index, $event)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
+                        </template>
+                        <template  v-if="confirmation">
+                            <td><button class="btn btn-success btn-xs"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></td>
+                        </template>
+                        <template  v-if="!confirmation">
+                            <template v-if="!canDelete">
+                                <td><button class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+                            </template>
+                        </template>
                     </tr>
                 </table>
             </div>

@@ -158,6 +158,8 @@ function GmapFasade(notificationFormMVVM){
                     var availablePosts = notificationFormMVVM.$data.availableFirefightersPosts;
                     for(var i=0; i < availablePosts.length; i++){
                         var v = availablePosts[i];
+                        v.confirmation = false;
+                        v.canDelete = true;
                         if( v.id == data.id ){
                             // add selected equipment
                             $(".equipmentInfo").each(function(idx){

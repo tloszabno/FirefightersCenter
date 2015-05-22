@@ -55,7 +55,6 @@ $(document).ready(function() {
     var gmapFasade = new GmapFasade(notificationFormMVVM);
     gmapFasade.initialize();
 
-
     $.getJSON("getAllFirefightersPosts", function(gotData){
         data.availableFirefightersPosts = gotData;    
         gmapFasade.addFirefightersPosts(gotData);        
@@ -69,7 +68,6 @@ $(document).ready(function() {
         var editId = $("#editNotificationId").val();
         $.getJSON("getNotification?id="+ editId, function(gotData){
             data.notification = gotData;
-
 
                 var address = gotData.address;
                 var city = gotData.city;

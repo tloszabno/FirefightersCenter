@@ -41,7 +41,7 @@ public class Report implements Serializable {
 	private String community;
 
 	@Column(name = "size", nullable = true)
-	private Double size;
+	private String size;
 
 	@Column(name = "object", length = 500, nullable = true)
 	private String object;
@@ -110,11 +110,11 @@ public class Report implements Serializable {
 		this.community = community;
 	}
 
-	public Double getSize() {
+	public String getSize() {
 		return size;
 	}
 
-	public void setSize(Double size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 
@@ -170,8 +170,7 @@ public class Report implements Serializable {
 		return firefightersBrigades;
 	}
 
-	public void setFirefightersBrigades(
-			List<FirefightersBrigadeReportEntry> firefightersBrigades) {
+	public void setFirefightersBrigades(List<FirefightersBrigadeReportEntry> firefightersBrigades) {
 		this.firefightersBrigades = firefightersBrigades;
 	}
 
