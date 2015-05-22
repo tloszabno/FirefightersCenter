@@ -8,6 +8,7 @@ import pl.edu.agh.integracja.firefighterspost.dao.CurrentStateDao;
 import pl.edu.agh.integracja.firefighterspost.dao.DummyDataProvider;
 import pl.edu.agh.integracja.firefighterspost.handler.GetCurrentStateHandler;
 import pl.edu.agh.integracja.firefighterspost.handler.PostFireNotificationHandler;
+import pl.edu.agh.integracja.firefighterspost.service.NotificationsService;
 import pl.edu.agh.integracja.firefighterspost.translator.AlertTranslator;
 import pl.edu.agh.integracja.firefighterspost.translator.CurrentStateTranslator;
 import pl.edu.agh.integracja.firefighterspost.view.MainAppPane;
@@ -57,4 +58,8 @@ public class Config {
 		return new MainAppPane();
 	}
 
+	@Bean(name = "notificationsService")
+	public NotificationsService notificationsService(){
+    return new NotificationsService();
+  }
 }

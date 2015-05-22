@@ -13,63 +13,69 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import pl.edu.agh.integracja.firefighterspost.service.NotificationsService;
+
+import javax.annotation.Resource;
 
 public class MainAppPane implements AlertListener {
 
-    private Label alarmReceivedLbl;
-    private Button confirmAlertBtn;
-    private Text confirmationTxt;
+  @Resource(name = "notificationsService")
+  private NotificationsService notificationsService;
 
-    public GridPane init() {
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+  private Label alarmReceivedLbl;
+  private Button confirmAlertBtn;
+  private Text confirmationTxt;
 
-        Text scenetitle = new Text("Post Firefighters");
-        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        scenetitle.setId("welcome-text");
+  public GridPane init() {
+    GridPane grid = new GridPane();
+    grid.setAlignment(Pos.CENTER);
+    grid.setHgap(10);
+    grid.setVgap(10);
+    grid.setPadding(new Insets(25, 25, 25, 25));
 
-        grid.add(scenetitle, 0, 0, 2, 1);
+    Text scenetitle = new Text("Post Firefighters");
+    scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    scenetitle.setId("welcome-text");
 
-        alarmReceivedLbl = new Label("");
-        grid.add(alarmReceivedLbl, 0, 1, 2, 1);
+    grid.add(scenetitle, 0, 0, 2, 1);
 
-        confirmAlertBtn = new Button("Confirm Alert");
-        HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-        hbBtn.getChildren().add(confirmAlertBtn);
-        grid.add(hbBtn, 1, 4, 2, 1);
+    alarmReceivedLbl = new Label("");
+    grid.add(alarmReceivedLbl, 0, 1, 2, 1);
 
-        confirmationTxt = new Text();
-        confirmationTxt.setId("confirmationTxt");
+    confirmAlertBtn = new Button("Confirm Alert");
+    HBox hbBtn = new HBox(10);
+    hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+    hbBtn.getChildren().add(confirmAlertBtn);
+    grid.add(hbBtn, 1, 4, 2, 1);
 
-        grid.add(confirmationTxt, 1, 6);
+    confirmationTxt = new Text();
+    confirmationTxt.setId("confirmationTxt");
 
-        confirmAlertBtn.setOnAction(new EventHandler<ActionEvent>() {
+    grid.add(confirmationTxt, 1, 6);
 
-            @Override
-            public void handle(ActionEvent e) {
-                confirmationTxt.setFill(Color.FIREBRICK);
-                confirmationTxt.setText("Alert Confirmed");
-                alarmReceivedLbl.setText("");
-                confirmAlertBtn.setDisable(true);
-            }
-        });
+    confirmAlertBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+      @Override
+      public void handle(ActionEvent e) {
+        confirmationTxt.setFill(Color.FIREBRICK);
+        confirmationTxt.setText("Alert Confirmed");
+        alarmReceivedLbl.setText("");
         confirmAlertBtn.setDisable(true);
+        notificationsService.confirmAlert();
+      }
+    });
+    confirmAlertBtn.setDisable(true);
 
-        return grid;
-    }
+    return grid;
+  }
 
+  @Override
+  public void onAlertReceive(String message) {
+    Platform.runLater(() -> {
+      confirmAlertBtn.setDisable(false);
+      alarmReceivedLbl.setText("Received Alarm: " + message);
+      confirmationTxt.setText("");
+    });
 
-    @Override
-    public void onAlertReceive(String message) {
-        Platform.runLater(() -> {
-            confirmAlertBtn.setDisable(false);
-            alarmReceivedLbl.setText("Received Alarm: " + message);
-            confirmationTxt.setText("");
-        });
-
-    }
+  }
 }
