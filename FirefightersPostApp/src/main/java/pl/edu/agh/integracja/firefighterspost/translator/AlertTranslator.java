@@ -15,7 +15,7 @@ public class AlertTranslator {
     dbDto.setCity(restDto.getCity());
     dbDto.setCreator(restDto.getCreator());
     dbDto.setDescription(restDto.getDescription());
-//    dbDto.setExternalId(restDto.get);
+    dbDto.setExternalId(restDto.getNotificationId());
     dbDto.setLatitude(restDto.getLatitude());
     dbDto.setLongitude(restDto.getLongitude());
     dbDto.setNotifiactionDate(restDto.getNotifiactionDate());

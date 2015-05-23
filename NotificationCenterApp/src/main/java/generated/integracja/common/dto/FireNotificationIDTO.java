@@ -20,6 +20,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({
+    "notificationId",
     "type",
     "address",
     "city",
@@ -34,6 +35,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 })
 public class FireNotificationIDTO {
 
+    @JsonProperty("notificationId")
+    private Long notificationId;
     @JsonProperty("type")
     private String type;
     @JsonProperty("address")
@@ -56,6 +59,31 @@ public class FireNotificationIDTO {
     private List<OrderedResource> orderedResources = new ArrayList<OrderedResource>();
     @JsonProperty("requestedFirefightersUnitNumber")
     private Integer requestedFirefightersUnitNumber;
+
+    /**
+     * 
+     * @return
+     *     The notificationId
+     */
+    @JsonProperty("notificationId")
+    public Long getNotificationId() {
+        return notificationId;
+    }
+
+    /**
+     * 
+     * @param notificationId
+     *     The notificationId
+     */
+    @JsonProperty("notificationId")
+    public void setNotificationId(Long notificationId) {
+        this.notificationId = notificationId;
+    }
+
+    public FireNotificationIDTO withNotificationId(Long notificationId) {
+        this.notificationId = notificationId;
+        return this;
+    }
 
     /**
      * 
@@ -339,7 +367,7 @@ public class FireNotificationIDTO {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(type).append(address).append(city).append(actionName).append(description).append(latitude).append(longitude).append(notifiactionDate).append(creator).append(orderedResources).append(requestedFirefightersUnitNumber).toHashCode();
+        return new HashCodeBuilder().append(notificationId).append(type).append(address).append(city).append(actionName).append(description).append(latitude).append(longitude).append(notifiactionDate).append(creator).append(orderedResources).append(requestedFirefightersUnitNumber).toHashCode();
     }
 
     @Override
@@ -351,7 +379,7 @@ public class FireNotificationIDTO {
             return false;
         }
         FireNotificationIDTO rhs = ((FireNotificationIDTO) other);
-        return new EqualsBuilder().append(type, rhs.type).append(address, rhs.address).append(city, rhs.city).append(actionName, rhs.actionName).append(description, rhs.description).append(latitude, rhs.latitude).append(longitude, rhs.longitude).append(notifiactionDate, rhs.notifiactionDate).append(creator, rhs.creator).append(orderedResources, rhs.orderedResources).append(requestedFirefightersUnitNumber, rhs.requestedFirefightersUnitNumber).isEquals();
+        return new EqualsBuilder().append(notificationId, rhs.notificationId).append(type, rhs.type).append(address, rhs.address).append(city, rhs.city).append(actionName, rhs.actionName).append(description, rhs.description).append(latitude, rhs.latitude).append(longitude, rhs.longitude).append(notifiactionDate, rhs.notifiactionDate).append(creator, rhs.creator).append(orderedResources, rhs.orderedResources).append(requestedFirefightersUnitNumber, rhs.requestedFirefightersUnitNumber).isEquals();
     }
 
 }
