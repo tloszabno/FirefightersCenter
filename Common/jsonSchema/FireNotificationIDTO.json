@@ -4,8 +4,8 @@
   "description": "RQ to firefightersPost",
   "type": "object",
   "properties": {
-    "id": {
-      "notificationId": "http://integracja.firefighters.ki.agh.edu.pl/notificationId",
+    "notificationId": {
+      "id": "http://integracja.firefighters.ki.agh.edu.pl/notificationId",
       "javaType": "Long"
     },
     "type": {
