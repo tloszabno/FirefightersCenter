@@ -2,15 +2,22 @@ package pl.agh.tomtom.firefighters;
 
 import generated.integracja.common.dto.*;
 import org.springframework.web.bind.annotation.*;
+import pl.agh.tomtom.firefighters.exceptions.FireException;
+import pl.agh.tomtom.firefighters.services.FireNotificationService;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Date;
 
 @RestController
 public class IntegrationRestController {
 
+  @Resource(name = "fireNotificationService")
+  private FireNotificationService fireNotificationService;
+
   @RequestMapping(value = "/notification", method = RequestMethod.POST)
-  public String postNotification(@RequestBody NotificationIDTO notification) {
+  public String postNotification(@RequestBody NotificationIDTO notification) throws FireException {
+    fireNotificationService.updateStateOfFireNotification(Long.valueOf(notification.getId()), notification.getState().name());
     return "OK - " + notification.getState();
   }
 

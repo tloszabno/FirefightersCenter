@@ -11,4 +11,7 @@ public interface FireNotificationService {
 	public List<FireNotificationDTO> getAllNotifications();
 
 	public FireNotificationDTO get(Long id) throws FireException;
+
+	public void updateStateOfFireNotification(Long id, String newState) throws FireException;
+
 }
