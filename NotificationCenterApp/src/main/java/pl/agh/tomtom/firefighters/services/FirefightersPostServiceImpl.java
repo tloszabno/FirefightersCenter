@@ -1,6 +1,7 @@
 package pl.agh.tomtom.firefighters.services;
 
-import java.util.ArrayList;
+import generated.integracja.common.dto.CurrentStateIDTO;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,12 +13,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.agh.tomtom.firefighters.assemblers.FirefightersPostAssembler;
+import pl.agh.tomtom.firefighters.assemblers.FirefightersPostCurrentDetailsAssebler;
 import pl.agh.tomtom.firefighters.dao.FirefightersPostDAO;
 import pl.agh.tomtom.firefighters.dto.FirefightersPostCurrentDetailsDTO;
 import pl.agh.tomtom.firefighters.dto.FirefightersPostDTO;
-import pl.agh.tomtom.firefighters.dto.PostEquipmentInfo;
 import pl.agh.tomtom.firefighters.exceptions.FireException;
 import pl.agh.tomtom.firefighters.model.FirefightersPost;
+import pl.agh.tomtom.firefighters.remote.FirefightersPostDownloader;
 
 @Transactional(propagation = Propagation.REQUIRED)
 public class FirefightersPostServiceImpl implements FirefightersPostService {
@@ -27,6 +29,10 @@ public class FirefightersPostServiceImpl implements FirefightersPostService {
 	@Autowired
 	@Qualifier("firefightersPostDAO")
 	private FirefightersPostDAO firefightersPostDAO;
+
+	@Autowired
+	@Qualifier("firefightersPostDownloader")
+	private FirefightersPostDownloader firefightersPostDownloader;
 
 	@Override
 	public void saveFirefightersPost(FirefightersPostDTO postDTO) throws FireException {
@@ -69,20 +75,12 @@ public class FirefightersPostServiceImpl implements FirefightersPostService {
 
 		FirefightersPostDTO firefightersPostDTO = get(id);
 
-		FirefightersPostCurrentDetailsDTO details = new FirefightersPostCurrentDetailsDTO();
-		details.setFirefightersPost(firefightersPostDTO);
+		CurrentStateIDTO details = firefightersPostDownloader.getCurrentState(firefightersPostDTO.getSystemIpAddress());
+		FirefightersPostCurrentDetailsDTO detailsDTO = FirefightersPostCurrentDetailsAssebler.fromRemote(details,
+				firefightersPostDTO);
 
-		// FIXME: connect to fire station post and get data, remove below
-		details.setAvailable(true).setAvailableUnits(2);
-
-		List<PostEquipmentInfo> availableEqipment = new ArrayList<PostEquipmentInfo>();
-		availableEqipment.add(new PostEquipmentInfo().setEquipmentName("drabina").setCount(3));
-		availableEqipment.add(new PostEquipmentInfo().setEquipmentName("helikopter").setCount(1));
-		availableEqipment.add(new PostEquipmentInfo().setEquipmentName("pompa glebinowa").setCount(1));
-		details.setEquipmentInfo(availableEqipment);
-
-		log.exit(details);
-		return details;
+		log.exit(detailsDTO);
+		return detailsDTO;
 	}
 
 	@Override

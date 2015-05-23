@@ -63,4 +63,5 @@
 	<bean id="fireNotificationService" class="pl.agh.tomtom.firefighters.services.FireNotificationServiceImpl"></bean>
 	<bean id="firefightersPostService" class="pl.agh.tomtom.firefighters.services.FirefightersPostServiceImpl"></bean>
 	<bean id="fireNotificationNotifier" class="pl.agh.tomtom.firefighters.remote.FireNotificationNotifierImpl"></bean>
+	<bean id="firefightersPostDownloader" class="pl.agh.tomtom.firefighters.remote.FirefightersPostDownloaderImpl"></bean>
 </beans>
