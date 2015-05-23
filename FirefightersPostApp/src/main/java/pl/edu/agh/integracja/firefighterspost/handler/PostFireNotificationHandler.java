@@ -20,6 +20,7 @@ public class PostFireNotificationHandler {
 
   @Resource(name = "alertTranslator")
   private AlertTranslator alertTranslator;
+  
   private List<AlertListener> alertListeners = new ArrayList<>();
 
   public void addAlertHandler(AlertListener alertListener) {
