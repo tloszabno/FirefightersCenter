@@ -1,5 +1,7 @@
 package pl.agh.tomtom.firefighters.services;
 
+import generated.integracja.common.dto.FireNotificationIDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.agh.tomtom.firefighters.assemblers.FireNotificationAssembler;
+import pl.agh.tomtom.firefighters.assemblers.FireNotificationRemoteAssembler;
 import pl.agh.tomtom.firefighters.dao.FireNotificationDAO;
 import pl.agh.tomtom.firefighters.dao.FirefightersPostDAO;
 import pl.agh.tomtom.firefighters.dto.FireNotificationDTO;
@@ -66,7 +69,9 @@ public class FireNotificationServiceImpl implements FireNotificationService {
 
 	private void sentNotifications(FireNotificationDTO notificationDTO) throws FireException {
 		for (FirefightersPostDTO post : notificationDTO.getFirefightersPosts()) {
-			this.fireNotificationNotifier.sendNotification(notificationDTO, post);
+			FireNotificationIDTO idto = FireNotificationRemoteAssembler.toRemote(notificationDTO);
+
+			this.fireNotificationNotifier.sendNotification(idto, post.getSystemIpAddress());
 		}
 	}
 

@@ -1,11 +1,9 @@
 package pl.agh.tomtom.firefighters.remote;
 
-import pl.agh.tomtom.firefighters.dto.FireNotificationDTO;
-import pl.agh.tomtom.firefighters.dto.FirefightersPostDTO;
+import generated.integracja.common.dto.FireNotificationIDTO;
 import pl.agh.tomtom.firefighters.exceptions.FireException;
 
 public interface FireNotificationNotifier {
-	public void sendNotification(FireNotificationDTO fireNotification, FirefightersPostDTO destination)
-			throws FireException;
+	public void sendNotification(FireNotificationIDTO idto, String systemIp) throws FireException;
 
 }
