@@ -127,6 +127,7 @@ public class AlertNotificationDbDto {
     this.requestedFirefightersUnitNumber = requestedFirefightersUnitNumber;
   }
 
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   public List<OrderedResourceDbDto> getOrderedResources() {
     return orderedResources;
   }
