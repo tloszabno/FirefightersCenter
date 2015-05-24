@@ -5,6 +5,7 @@ import pl.edu.agh.integracja.firefighterspost.db.dto.AlertNotificationDbDto;
 import pl.edu.agh.integracja.firefighterspost.db.dto.OrderedResourceDbDto;
 import pl.edu.agh.integracja.firefighterspost.gui.model.AlertGuiModel;
 
+import java.text.SimpleDateFormat;
 import java.util.stream.Collectors;
 
 public class AlertTranslator {
@@ -34,8 +35,22 @@ public class AlertTranslator {
 
   }
 
-  public AlertGuiModel fromRestToGuiModel(FireNotificationIDTO fireNotificationIDTO) {
-    AlertGuiModel guiModel = new AlertGuiModel(fireNotificationIDTO.getType(), fireNotificationIDTO.getCity(), fireNotificationIDTO.getActionName(), fireNotificationIDTO.getRequestedFirefightersUnitNumber().toString());
+  public AlertGuiModel fromDbToGuiModel(AlertNotificationDbDto dbModel) {
+    AlertGuiModel guiModel = new AlertGuiModel();
+    guiModel.setExternalId(dbModel.getExternalId());
+    guiModel.setType(dbModel.getType());
+    guiModel.setAddress(dbModel.getAddress());
+    guiModel.setCity(dbModel.getCity());
+    guiModel.setActionName(dbModel.getActionName());
+    guiModel.setDescription(dbModel.getDescription());
+    guiModel.setLatitude(dbModel.getLatitude());
+    guiModel.setLongitude(dbModel.getLongitude());
+    guiModel.setNotifiactionDate(new SimpleDateFormat("yyyy-MM-dd hh:mm").format(dbModel.getNotifiactionDate()));
+    guiModel.setCreator(dbModel.getCreator());
+    guiModel.setRequestedUnits(dbModel.getRequestedFirefightersUnitNumber().toString());
+    guiModel.setOrderedResources(dbModel.getOrderedResources().stream().map(or -> or.getName() + ": " + or.getQuantity()).collect(Collectors.toList()));
+    guiModel.setRequestedFirefightersUnitNumber(dbModel.getRequestedFirefightersUnitNumber());
+
     return guiModel;
   }
 }

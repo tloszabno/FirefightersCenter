@@ -31,8 +31,7 @@ public class PostFireNotificationHandler {
   public String handle(FireNotificationIDTO fireNotificationIDTO) {
     AlertNotificationDbDto alertNotificationDbDto = alertTranslator.fromRestToDbModel(fireNotificationIDTO);
     alertDao.storeAlert(alertNotificationDbDto);
-    AlertGuiModel alertGuiModel = alertTranslator.fromRestToGuiModel(fireNotificationIDTO);
-
+    AlertGuiModel alertGuiModel = alertTranslator.fromDbToGuiModel(alertNotificationDbDto);
     alertListeners.forEach(listener -> listener.onAlertReceive(alertGuiModel));
 
     LOG.info("ALARM: " + fireNotificationIDTO.getActionName());

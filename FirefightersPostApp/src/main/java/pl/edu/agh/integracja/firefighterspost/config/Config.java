@@ -12,7 +12,6 @@ import pl.edu.agh.integracja.firefighterspost.service.RestClient;
 import pl.edu.agh.integracja.firefighterspost.translator.AlertTranslator;
 import pl.edu.agh.integracja.firefighterspost.translator.CurrentStateTranslator;
 import pl.edu.agh.integracja.firefighterspost.view.FirefightersMainPane;
-import pl.edu.agh.integracja.firefighterspost.view.MainAppPane;
 
 @Configuration
 public class Config {
