@@ -32,8 +32,10 @@ public class FirefightersMainPane implements AlertListener<AlertGuiModel> {
   private static final int GRID_COLUMN_NUMBERS = 3;
   final ObservableList<AlertGuiModel> data = FXCollections.observableArrayList();
   private final TableView<AlertGuiModel> table = new TableView<>();
+
   @Resource(name = "notificationsService")
   private NotificationsService notificationsService;
+
   private Label alarmReceivedLbl;
   private Button confirmAlertBtn;
   private Button finishAlertBtn;
@@ -124,6 +126,7 @@ public class FirefightersMainPane implements AlertListener<AlertGuiModel> {
     grid.add(hbBtn, 0, GRID_BUTTONS_IDX, 1, 1);
 
     confirmAlertBtn.setOnAction(event -> {
+      notificationsService.confirmAlert(table.getSelectionModel().getSelectedItem().getExternalId());
       statusText.setFill(Color.FIREBRICK);
       statusText.setText("Wysłano potwierdzonie otrzymania alarmu.");
       alarmReceivedLbl.setText("");
@@ -136,6 +139,7 @@ public class FirefightersMainPane implements AlertListener<AlertGuiModel> {
     grid.add(hbBtn, 1, GRID_BUTTONS_IDX, 1, 1);
 
     finishAlertBtn.setOnAction(event -> {
+      notificationsService.finishAlert(table.getSelectionModel().getSelectedItem().getExternalId());
       statusText.setFill(Color.FIREBRICK);
       statusText.setText("Wysłano potwierdzenie zakończenia akcji.");
       alarmReceivedLbl.setText("");
@@ -148,6 +152,7 @@ public class FirefightersMainPane implements AlertListener<AlertGuiModel> {
     grid.add(hbBtn, 2, GRID_BUTTONS_IDX, 1, 1);
 
     reportAlertBtn.setOnAction(event -> {
+      notificationsService.getReport();
       statusText.setFill(Color.FIREBRICK);
       statusText.setText("Wysłano raport.");
       alarmReceivedLbl.setText("");

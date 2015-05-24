@@ -20,11 +20,8 @@ public class RestClient {
 
   }
 
-  public void notifyCenter() {
+  public void notifyCenter(NotificationIDTO request) {
     RestTemplate restTemplate = new RestTemplate();
-    NotificationIDTO request = new NotificationIDTO();
-    request.setId("1231");
-    request.setState(NotificationIDTO.State.CONFIRMED);
     restTemplate.postForLocation(getFullUrl("notification"), request);
   }
 
