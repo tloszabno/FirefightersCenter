@@ -90,10 +90,10 @@ public class FirefightersMainPane implements AlertListener<AlertGuiModel> {
     cityColumn.setCellValueFactory(
         new PropertyValueFactory<>("city"));
 
-    TableColumn shortDescriptionColumn = new TableColumn("Krótki opis");
+    TableColumn shortDescriptionColumn = new TableColumn("Adres");
     shortDescriptionColumn.setMinWidth(200);
     shortDescriptionColumn.setCellValueFactory(
-        new PropertyValueFactory<>("actionName"));
+        new PropertyValueFactory<>("address"));
 
     TableColumn unitsNumber = new TableColumn("Zastępy");
     unitsNumber.setMinWidth(40);
@@ -168,6 +168,7 @@ public class FirefightersMainPane implements AlertListener<AlertGuiModel> {
   @Override
   public void onAlertReceive(AlertGuiModel message) {
     Platform.runLater(() -> {
+      alarmReceivedLbl.setText("Otrzymano zgłoszenie: " + message.getType());
       data.add(0, message);
     });
   }

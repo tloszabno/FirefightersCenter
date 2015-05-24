@@ -129,7 +129,6 @@ public class AlertGuiModel {
         "Typ: " + type +
         "\nAdres: " + address +
         "\nMiasto: " + city +
-        "\nKrótki opis: '" + actionName +
         "\nOpis: " + description +
         "\nLokalizacja-szerokość: " + latitude +
         "\nLokalizacja-długość: " + longitude +
