@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import pl.edu.agh.integracja.common.dto.FireNotificationIDTO;
 import pl.edu.agh.integracja.firefighterspost.dao.AlertDao;
 import pl.edu.agh.integracja.firefighterspost.db.dto.AlertNotificationDbDto;
+import pl.edu.agh.integracja.firefighterspost.gui.model.AlertGuiModel;
 import pl.edu.agh.integracja.firefighterspost.translator.AlertTranslator;
 import pl.edu.agh.integracja.firefighterspost.view.AlertListener;
 
@@ -21,7 +22,7 @@ public class PostFireNotificationHandler {
   @Resource(name = "alertTranslator")
   private AlertTranslator alertTranslator;
   
-  private List<AlertListener> alertListeners = new ArrayList<>();
+  private List<AlertListener<AlertGuiModel>> alertListeners = new ArrayList<>();
 
   public void addAlertHandler(AlertListener alertListener) {
     alertListeners.add(alertListener);
@@ -30,8 +31,9 @@ public class PostFireNotificationHandler {
   public String handle(FireNotificationIDTO fireNotificationIDTO) {
     AlertNotificationDbDto alertNotificationDbDto = alertTranslator.fromRestToDbModel(fireNotificationIDTO);
     alertDao.storeAlert(alertNotificationDbDto);
+    AlertGuiModel alertGuiModel = alertTranslator.fromRestToGuiModel(fireNotificationIDTO);
 
-    alertListeners.forEach(listener -> listener.onAlertReceive(fireNotificationIDTO.getActionName()));
+    alertListeners.forEach(listener -> listener.onAlertReceive(alertGuiModel));
 
     LOG.info("ALARM: " + fireNotificationIDTO.getActionName());
     LOG.info(fireNotificationIDTO);

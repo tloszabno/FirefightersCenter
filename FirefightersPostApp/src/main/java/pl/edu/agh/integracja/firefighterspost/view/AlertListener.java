@@ -1,6 +1,6 @@
 package pl.edu.agh.integracja.firefighterspost.view;
 
-public interface AlertListener {
+public interface AlertListener<T> {
 
-    void onAlertReceive(String message);
+    void onAlertReceive(T message);
 }

@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Lazy;
 import pl.edu.agh.integracja.firefighterspost.dao.DummyDataProvider;
-import pl.edu.agh.integracja.firefighterspost.view.MainAppPane;
+import pl.edu.agh.integracja.firefighterspost.view.FirefightersMainPane;
 
 import javax.annotation.Resource;
 import java.net.URL;
@@ -22,8 +22,8 @@ public class FirefighterPostApp extends Application {
   private static final Logger LOG = Logger.getLogger(FirefighterPostApp.class);
   private static String[] savedArgs;
 
-  @Resource(name = "mainAppPane")
-  private MainAppPane mainLayout;
+  @Resource(name = "firefightersMainPane")
+  private FirefightersMainPane firefightersMainPane;
 
   @Resource(name = "dummyDataProvider")
   private DummyDataProvider dummyDataProvider;
@@ -56,7 +56,7 @@ public class FirefighterPostApp extends Application {
   public void start(Stage stage) throws Exception {
     notifyPreloader(new Preloader.StateChangeNotification(Preloader.StateChangeNotification.Type.BEFORE_START));
     stage.setTitle("Post Firefighters App");
-    Scene scene = new Scene(mainLayout.init());
+    Scene scene = new Scene(firefightersMainPane.initView());
     stage.setScene(scene);
 
     URL resource = FirefighterPostApp.class.getClassLoader().getResource("ui.css");

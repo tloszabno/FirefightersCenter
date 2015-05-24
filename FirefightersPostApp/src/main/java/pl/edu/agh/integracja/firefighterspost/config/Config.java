@@ -11,6 +11,7 @@ import pl.edu.agh.integracja.firefighterspost.service.NotificationsService;
 import pl.edu.agh.integracja.firefighterspost.service.RestClient;
 import pl.edu.agh.integracja.firefighterspost.translator.AlertTranslator;
 import pl.edu.agh.integracja.firefighterspost.translator.CurrentStateTranslator;
+import pl.edu.agh.integracja.firefighterspost.view.FirefightersMainPane;
 import pl.edu.agh.integracja.firefighterspost.view.MainAppPane;
 
 @Configuration
@@ -34,7 +35,7 @@ public class Config {
   @Bean(name = "postFireNotificationHandler")
   public PostFireNotificationHandler postFireNotificationHandler() {
     PostFireNotificationHandler postFireNotificationHandler = new PostFireNotificationHandler();
-    postFireNotificationHandler.addAlertHandler(mainAppPane());
+    postFireNotificationHandler.addAlertHandler(firefightersMainPane());
     return postFireNotificationHandler;
   }
 
@@ -53,9 +54,9 @@ public class Config {
     return new DummyDataProvider();
   }
 
-  @Bean(name = "mainAppPane")
-  public MainAppPane mainAppPane() {
-    return new MainAppPane();
+  @Bean(name = "firefightersMainPane")
+  public FirefightersMainPane firefightersMainPane(){
+    return new FirefightersMainPane();
   }
 
   @Bean(name = "notificationsService")

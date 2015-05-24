@@ -3,6 +3,7 @@ package pl.edu.agh.integracja.firefighterspost.translator;
 import pl.edu.agh.integracja.common.dto.FireNotificationIDTO;
 import pl.edu.agh.integracja.firefighterspost.db.dto.AlertNotificationDbDto;
 import pl.edu.agh.integracja.firefighterspost.db.dto.OrderedResourceDbDto;
+import pl.edu.agh.integracja.firefighterspost.gui.model.AlertGuiModel;
 
 import java.util.stream.Collectors;
 
@@ -31,5 +32,10 @@ public class AlertTranslator {
 
     return dbDto;
 
+  }
+
+  public AlertGuiModel fromRestToGuiModel(FireNotificationIDTO fireNotificationIDTO) {
+    AlertGuiModel guiModel = new AlertGuiModel(fireNotificationIDTO.getType(), fireNotificationIDTO.getCity(), fireNotificationIDTO.getActionName(), fireNotificationIDTO.getRequestedFirefightersUnitNumber().toString());
+    return guiModel;
   }
 }
