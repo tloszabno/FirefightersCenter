@@ -96,7 +96,7 @@ public class FirefightersMainPane implements AlertListener<AlertGuiModel> {
     TableColumn unitsNumber = new TableColumn("Zastępy");
     unitsNumber.setMinWidth(40);
     unitsNumber.setCellValueFactory(
-        new PropertyValueFactory<>("units"));
+        new PropertyValueFactory<>("requestedFirefightersUnitNumber"));
 
     table.setItems(data);
     table.getColumns().addAll(typeColumn, cityColumn, shortDescriptionColumn, unitsNumber);
@@ -137,7 +137,7 @@ public class FirefightersMainPane implements AlertListener<AlertGuiModel> {
 
     finishAlertBtn.setOnAction(event -> {
       statusText.setFill(Color.FIREBRICK);
-      statusText.setText("Wysłąno potwierdzenie zakończenia akcji.");
+      statusText.setText("Wysłano potwierdzenie zakończenia akcji.");
       alarmReceivedLbl.setText("");
     });
 

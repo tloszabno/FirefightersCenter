@@ -126,16 +126,16 @@ public class AlertGuiModel {
   @Override
   public String toString() {
     return
-        "Typ: " + type + '\'' +
-        "\nAdres: " + address + '\'' +
-        "\nMiasto: " + city + '\'' +
-        "\nKrótki opis: '" + actionName + '\'' +
-        "\nOpis: " + description + '\'' +
-        "\nLokalizacja-szerokość: " + latitude + '\'' +
-        "\nLokalizacja-długość: " + longitude + '\'' +
-        "\nData powiadomienia: " + notifiactionDate + '\'' +
-        "\nZgłaszający: " + creator + '\'' +
-        "\nLiczba zastępów: " + requestedUnits + '\'' +
+        "Typ: " + type +
+        "\nAdres: " + address +
+        "\nMiasto: " + city +
+        "\nKrótki opis: '" + actionName +
+        "\nOpis: " + description +
+        "\nLokalizacja-szerokość: " + latitude +
+        "\nLokalizacja-długość: " + longitude +
+        "\nData powiadomienia: " + notifiactionDate +
+        "\nZgłaszający: " + creator +
+        "\nLiczba zastępów: " + requestedUnits +
         "\nZamówiony sprzęt: " + orderedResources +
         "\nLiczba zamówionych zastępów: " + requestedFirefightersUnitNumber;
   }
