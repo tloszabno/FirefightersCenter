@@ -30,6 +30,7 @@ public class FirefightersAlertsPane implements AlertListener<AlertGuiModel> {
   private static final int GRID_BUTTONS_IDX = 4;
   private static final int GRID_BOTTOM_STATUS_IDX = 5;
   private static final int GRID_COLUMN_NUMBERS = 3;
+
   final ObservableList<AlertGuiModel> data = FXCollections.observableArrayList();
   private final TableView<AlertGuiModel> table = new TableView<>();
 
