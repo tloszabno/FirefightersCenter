@@ -14,7 +14,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import pl.edu.agh.integracja.firefighterspost.gui.model.ReportHeaderGuiModel;
+import pl.edu.agh.integracja.firefighterspost.service.ReportsService;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 
 public class FirefightersReportsPane {
@@ -25,6 +27,10 @@ public class FirefightersReportsPane {
   private Button getReportsListBtn;
   private Button getReportDetailsBtn;
   private GridPane grid;
+
+
+  @Resource(name = "reportsService")
+  private ReportsService reportsService;
 
   public GridPane initView() {
     initRootGridPane();
@@ -83,9 +89,10 @@ public class FirefightersReportsPane {
     grid.add(hbBtn, 0, 2, 1, 1);
 
     getReportsListBtn.setOnAction(event -> {
-      data.addAll(Arrays.asList(
-          new ReportHeaderGuiModel("1", "2015-05-23 12:45:13", "pożar 1", "Kraków, Bieżanowska 12")
-      ));
+      data.addAll(reportsService.getReportsList());
+//      data.addAll(Arrays.asList(
+//          new ReportHeaderGuiModel("1", "2015-05-23 12:45:13", "pożar 1", "Kraków, Bieżanowska 12")
+//      ));
 
 //      notificationsService.confirmAlert(table.getSelectionModel().getSelectedItem().getExternalId());
 //      statusText.setFill(Color.FIREBRICK);

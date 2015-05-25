@@ -8,9 +8,11 @@ import pl.edu.agh.integracja.firefighterspost.dao.DummyDataProvider;
 import pl.edu.agh.integracja.firefighterspost.handler.GetCurrentStateHandler;
 import pl.edu.agh.integracja.firefighterspost.handler.PostFireNotificationHandler;
 import pl.edu.agh.integracja.firefighterspost.service.NotificationsService;
+import pl.edu.agh.integracja.firefighterspost.service.ReportsService;
 import pl.edu.agh.integracja.firefighterspost.service.RestClient;
 import pl.edu.agh.integracja.firefighterspost.translator.AlertTranslator;
 import pl.edu.agh.integracja.firefighterspost.translator.CurrentStateTranslator;
+import pl.edu.agh.integracja.firefighterspost.translator.ReportsTranslator;
 import pl.edu.agh.integracja.firefighterspost.view.FirefightersAlertsPane;
 import pl.edu.agh.integracja.firefighterspost.view.FirefightersReportsPane;
 import pl.edu.agh.integracja.firefighterspost.view.FirefightersRootPane;
@@ -50,6 +52,11 @@ public class Config {
     return new AlertTranslator();
   }
 
+  @Bean(name = "reportsTranslator")
+  public ReportsTranslator reportsTranslator() {
+    return new ReportsTranslator();
+  }
+
   @Bean(name = "dummyDataProvider")
   public DummyDataProvider dummyDataProvider() {
     return new DummyDataProvider();
@@ -73,6 +80,11 @@ public class Config {
   @Bean(name = "notificationsService")
   public NotificationsService notificationsService() {
     return new NotificationsService();
+  }
+
+  @Bean(name = "reportsService")
+  public ReportsService reportsService() {
+    return new ReportsService();
   }
 
   @Bean(name = "restClient")

@@ -4,12 +4,21 @@ import org.apache.log4j.Logger;
 import org.springframework.web.client.RestTemplate;
 import pl.edu.agh.integracja.common.dto.NotificationIDTO;
 import pl.edu.agh.integracja.common.dto.ReportIDTO;
+import pl.edu.agh.integracja.common.dto.ReportListIDTO;
 
 import java.util.HashMap;
 
 public class RestClient {
 
   Logger logger = Logger.getLogger(RestClient.class);
+
+  public ReportListIDTO getReportsList() {
+    RestTemplate restTemplate = new RestTemplate();
+    HashMap<String, Object> urlVariables = new HashMap<>();
+    urlVariables.put("postName", "foobar");
+    ReportListIDTO reportIDTO = restTemplate.getForObject(getFullUrl("reports?postName={postName}"), ReportListIDTO.class, urlVariables);
+    return reportIDTO;
+  }
 
   public void getReport() {
     RestTemplate restTemplate = new RestTemplate();
