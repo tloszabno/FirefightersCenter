@@ -11,7 +11,9 @@ import pl.edu.agh.integracja.firefighterspost.service.NotificationsService;
 import pl.edu.agh.integracja.firefighterspost.service.RestClient;
 import pl.edu.agh.integracja.firefighterspost.translator.AlertTranslator;
 import pl.edu.agh.integracja.firefighterspost.translator.CurrentStateTranslator;
-import pl.edu.agh.integracja.firefighterspost.view.FirefightersMainPane;
+import pl.edu.agh.integracja.firefighterspost.view.FirefightersAlertsPane;
+import pl.edu.agh.integracja.firefighterspost.view.FirefightersReportsPane;
+import pl.edu.agh.integracja.firefighterspost.view.FirefightersRootPane;
 
 @Configuration
 public class Config {
@@ -34,7 +36,7 @@ public class Config {
   @Bean(name = "postFireNotificationHandler")
   public PostFireNotificationHandler postFireNotificationHandler() {
     PostFireNotificationHandler postFireNotificationHandler = new PostFireNotificationHandler();
-    postFireNotificationHandler.addAlertHandler(firefightersMainPane());
+    postFireNotificationHandler.addAlertHandler(firefightersAlertsPane());
     return postFireNotificationHandler;
   }
 
@@ -53,9 +55,19 @@ public class Config {
     return new DummyDataProvider();
   }
 
-  @Bean(name = "firefightersMainPane")
-  public FirefightersMainPane firefightersMainPane(){
-    return new FirefightersMainPane();
+  @Bean(name = "firefightersAlertsPane")
+  public FirefightersAlertsPane firefightersAlertsPane() {
+    return new FirefightersAlertsPane();
+  }
+
+  @Bean(name = "firefightersReportsPane")
+  public FirefightersReportsPane firefightersReportsPane() {
+    return new FirefightersReportsPane();
+  }
+
+  @Bean(name = "firefightersRootPane")
+  public FirefightersRootPane firefightersRootPane() {
+    return new FirefightersRootPane(firefightersAlertsPane(), firefightersReportsPane());
   }
 
   @Bean(name = "notificationsService")

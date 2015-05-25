@@ -6,6 +6,7 @@ import pl.edu.agh.integracja.firefighterspost.db.dto.OrderedResourceDbDto;
 import pl.edu.agh.integracja.firefighterspost.gui.model.AlertGuiModel;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 public class AlertTranslator {
@@ -45,7 +46,7 @@ public class AlertTranslator {
     guiModel.setDescription(dbModel.getDescription());
     guiModel.setLatitude(dbModel.getLatitude());
     guiModel.setLongitude(dbModel.getLongitude());
-    guiModel.setNotifiactionDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(dbModel.getNotifiactionDate()));
+    guiModel.setNotifiactionDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
     guiModel.setCreator(dbModel.getCreator());
     guiModel.setRequestedUnits(dbModel.getRequestedFirefightersUnitNumber().toString());
     guiModel.setOrderedResources(dbModel.getOrderedResources().stream().map(or -> or.getName() + ": " + or.getQuantity()).collect(Collectors.toList()));
