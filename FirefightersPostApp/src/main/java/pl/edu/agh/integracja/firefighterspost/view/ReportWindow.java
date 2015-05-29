@@ -2,8 +2,7 @@ package pl.edu.agh.integracja.firefighterspost.view;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -18,12 +17,15 @@ public class ReportWindow {
 
     Group root = new Group();
     Scene scene = new Scene(root, 550, 550, Color.WHITE);
-    TabPane tabPane = new TabPane();
 
     pane.prefHeightProperty().bind(scene.heightProperty());
     pane.prefWidthProperty().bind(scene.widthProperty());
 
-    root.getChildren().add(pane);
+    ScrollPane scrollPane = new ScrollPane();
+    scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+    scrollPane.setContent(pane);
+    root.getChildren().add(scrollPane);
 
     stage.setScene(scene);
     return stage;
