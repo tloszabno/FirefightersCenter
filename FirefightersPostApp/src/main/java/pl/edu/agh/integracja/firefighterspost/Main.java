@@ -42,6 +42,7 @@ public class Main extends Application {
 //    root.getChildren().add(borderPane);
 
     stage.setScene(new FirefightersRootPane(new FirefightersAlertsPane(), new FirefightersReportsPane()).initScene());
+    stage.setScene(new FirefightersRootPane(new FirefightersAlertsPane(), new FirefightersReportsPane()).initScene());
     stage.show();
   }
 }

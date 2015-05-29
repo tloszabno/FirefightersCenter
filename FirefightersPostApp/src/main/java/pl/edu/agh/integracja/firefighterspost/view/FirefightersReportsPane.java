@@ -4,15 +4,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pl.edu.agh.integracja.firefighterspost.gui.model.ReportHeaderGuiModel;
 import pl.edu.agh.integracja.firefighterspost.service.ReportsService;
 
@@ -108,6 +113,8 @@ public class FirefightersReportsPane {
 
     getReportDetailsBtn.setOnAction(event -> {
 
+      new ReportWindow().initStage(new ReportPane().initView()).show();
+//      stage.show();
 //      notificationsService.confirmAlert(table.getSelectionModel().getSelectedItem().getExternalId());
 //      statusText.setFill(Color.FIREBRICK);
 //      statusText.setText("Wysłano potwierdzonie otrzymania alarmu.");

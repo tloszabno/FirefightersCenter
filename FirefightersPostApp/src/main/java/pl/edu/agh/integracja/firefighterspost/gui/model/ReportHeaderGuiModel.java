@@ -18,31 +18,35 @@ public class ReportHeaderGuiModel {
     return reportId;
   }
 
-  public void setReportId(String reportId) {
+  public ReportHeaderGuiModel setReportId(String reportId) {
     this.reportId = reportId;
+    return this;
   }
 
   public String getNotificationDate() {
     return notificationDate;
   }
 
-  public void setNotificationDate(String notificationDate) {
+  public ReportHeaderGuiModel setNotificationDate(String notificationDate) {
     this.notificationDate = notificationDate;
+    return this;
   }
 
   public String getActionName() {
     return actionName;
   }
 
-  public void setActionName(String actionName) {
+  public ReportHeaderGuiModel setActionName(String actionName) {
     this.actionName = actionName;
+    return this;
   }
 
   public String getAddress() {
     return address;
   }
 
-  public void setAddress(String address) {
+  public ReportHeaderGuiModel setAddress(String address) {
     this.address = address;
+    return this;
   }
 }
