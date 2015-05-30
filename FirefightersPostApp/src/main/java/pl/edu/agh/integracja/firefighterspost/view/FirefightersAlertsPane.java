@@ -153,7 +153,10 @@ public class FirefightersAlertsPane implements AlertListener<AlertGuiModel> {
     grid.add(hbBtn, 2, GRID_BUTTONS_IDX, 1, 1);
 
     reportAlertBtn.setOnAction(event -> {
-      notificationsService.getReport();
+//      notificationsService.getReport();
+
+      new ReportWindow().initStage(new ReportPane().initView(ReportPane.ReportPaneMode.ADD_REPORT)).show();
+
       statusText.setFill(Color.FIREBRICK);
       statusText.setText("Wysłano raport.");
       alarmReceivedLbl.setText("");

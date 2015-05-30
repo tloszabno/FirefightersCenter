@@ -16,7 +16,7 @@ public class ReportWindow {
     stage.setTitle("Raport");
 
     Group root = new Group();
-    Scene scene = new Scene(root, 550, 550, Color.WHITE);
+    Scene scene = new Scene(root, 900, 700, Color.WHITE);
 
     pane.prefHeightProperty().bind(scene.heightProperty());
     pane.prefWidthProperty().bind(scene.widthProperty());

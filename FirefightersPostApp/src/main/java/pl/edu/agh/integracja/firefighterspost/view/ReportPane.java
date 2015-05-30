@@ -3,20 +3,19 @@ package pl.edu.agh.integracja.firefighterspost.view;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import pl.edu.agh.integracja.firefighterspost.gui.model.ReportBrigadeGuiModel;
-import pl.edu.agh.integracja.firefighterspost.gui.model.ReportDamageGuiModel;
-import pl.edu.agh.integracja.firefighterspost.gui.model.ReportEquipmentGuiModel;
-import pl.edu.agh.integracja.firefighterspost.gui.model.ReportFirefighterGuiModel;
+import org.apache.commons.lang3.StringUtils;
+import pl.edu.agh.integracja.firefighterspost.gui.model.*;
+
+import java.util.Arrays;
 
 public class ReportPane {
 
@@ -35,11 +34,8 @@ public class ReportPane {
   private TextField areaSizeText;
   private TextField objectNameText;
   private TextField objectOwnerText;
-  private TextField otherDamagesText;
   private TextField reporterText;
-  private TextField usedEquipmentText;
-  private TextField firefightersText;
-  private TextField brigadesText;
+
   private TableView<ReportDamageGuiModel> damagesTable;
   private TableView<ReportEquipmentGuiModel> equipmentTable;
   private TableView<ReportFirefighterGuiModel> firefightersTable;
@@ -47,17 +43,43 @@ public class ReportPane {
 
   private int rowIdx = 0;
 
-  public GridPane initView() {
+  private ReportPaneMode displayMode;
+
+  public GridPane initView(ReportPaneMode mode) {
+    this.displayMode = mode;
 
     initGrid();
     initHeader();
     initLabelsAndText();
-    initDamagesTable();
-    initEquipmentsTable();
-    initFirefightersTable();
-    initBrigadesTable();
+    initDamagesTableSection();
+    initEquipmentsTableSection();
+    initFirefightersTableSection();
+    initBrigadesTableSection();
+    initSendReportPart();
 
     return grid;
+  }
+
+  public void fillWithData(ReportGuiModel model) {
+    fillTextIfNotBlank(postNameText, model.getPostName());
+    fillTextIfNotBlank(actionNameText, model.getActtionName());
+    fillTextIfNotBlank(accidentTypeText, model.getAccidentType());
+    fillTextIfNotBlank(communityText, model.getCommunity());
+    fillTextIfNotBlank(areaSizeText, model.getAreaSize());
+    fillTextIfNotBlank(objectNameText, model.getObjectName());
+    fillTextIfNotBlank(objectOwnerText, model.getOwner());
+    fillTextIfNotBlank(reporterText, model.getCreator());
+
+    damagesList.addAll(model.getDamages());
+    equipmentsList.addAll(model.getUsedEquipment());
+    firefightersList.addAll(model.getFirefighters());
+    brigadesList.addAll(model.getBrigades());
+  }
+
+  private void fillTextIfNotBlank(TextField postNameText, String postName) {
+    if (StringUtils.isBlank(postNameText.getText())) {
+      postNameText.setText(postName);
+    }
   }
 
   private void initHeader() {
@@ -78,35 +100,35 @@ public class ReportPane {
 
   private void initLabelsAndText() {
     grid.add(createLabel("Nazwa posterunku"), LABEL_IDX, getNextRowIdx());
-    postNameText = createTextField();
+    postNameText = createTextField("Nazwa posterunku");
     grid.add(postNameText, TEXT_IDX, getCurrentRowIdx());
 
     grid.add(createLabel("Nazwa akcji"), LABEL_IDX, getNextRowIdx());
-    actionNameText = createTextField();
+    actionNameText = createTextField("Nazwa akcji");
     grid.add(actionNameText, TEXT_IDX, getCurrentRowIdx());
 
     grid.add(createLabel("Typ akcji"), LABEL_IDX, getNextRowIdx());
-    accidentTypeText = createTextField();
+    accidentTypeText = createTextField("Typ akcji");
     grid.add(accidentTypeText, TEXT_IDX, getCurrentRowIdx());
 
     grid.add(createLabel("Gmina"), LABEL_IDX, getNextRowIdx());
-    communityText = createTextField();
+    communityText = createTextField("Gmina");
     grid.add(communityText, TEXT_IDX, getCurrentRowIdx());
 
     grid.add(createLabel("Powierzchnia akcji"), LABEL_IDX, getNextRowIdx());
-    areaSizeText = createTextField();
+    areaSizeText = createTextField("Powierzchnia akcji");
     grid.add(areaSizeText, TEXT_IDX, getCurrentRowIdx());
 
     grid.add(createLabel("Nazwa obiektu"), LABEL_IDX, getNextRowIdx());
-    objectNameText = createTextField();
+    objectNameText = createTextField("Nazwa obiektu");
     grid.add(objectNameText, TEXT_IDX, getCurrentRowIdx());
 
     grid.add(createLabel("Właściciel obiektu"), LABEL_IDX, getNextRowIdx());
-    objectOwnerText = createTextField();
+    objectOwnerText = createTextField("Właściciel obiektu");
     grid.add(objectOwnerText, TEXT_IDX, getCurrentRowIdx());
 
     grid.add(createLabel("Osoba wypełniająca raport"), LABEL_IDX, getNextRowIdx());
-    reporterText = createTextField();
+    reporterText = createTextField("Osoba wypełniająca raport");
     grid.add(reporterText, TEXT_IDX, getCurrentRowIdx());
   }
 
@@ -116,17 +138,20 @@ public class ReportPane {
     return label;
   }
 
-  private TextField createTextField() {
+  private TextField createTextField(String tooltipAndPromptValue) {
     TextField textField = new TextField();
-    textField.setMinWidth(200);
+    textField.setPromptText(tooltipAndPromptValue);
+    textField.setTooltip(new Tooltip(tooltipAndPromptValue));
+    textField.setMinWidth(100);
     return textField;
   }
 
-  private void initDamagesTable() {
-    grid.add(createLabel("Pozostałe uszkodzenia - TABELA"), LABEL_IDX, getNextRowIdx());
+  private void initDamagesTableSection() {
+    grid.add(createLabel("Pozostałe uszkodzenia:"), LABEL_IDX, getNextRowIdx());
 
     damagesTable = createTableView();
     TableColumn descriptionColumn = createTableColumn("Opis uszkodzenia", "Description");
+    descriptionColumn.setMinWidth(300);
     new TableColumn();
 
     damagesList.add(new ReportDamageGuiModel().setDescription("Przebita opona"));
@@ -136,10 +161,28 @@ public class ReportPane {
     damagesTable.getColumns().addAll(descriptionColumn);
 
     grid.add(damagesTable, 0, getNextRowIdx(), COLUMNS_NUMBER, 1);
+
+    HBox hbox = createHbox();
+    Button damagesButton = new Button("Dodaj uszkodzenie:");
+    TextField damagesInputText = createTextField("Opis uszkodzenia");
+    hbox.getChildren().addAll(damagesButton, damagesInputText);
+
+    damagesButton.setOnAction(event -> {
+      String text = damagesInputText.getText();
+      if (StringUtils.isBlank(text)) {
+        return;
+      }
+
+      damagesList.add(new ReportDamageGuiModel().setDescription(text));
+      damagesInputText.clear();
+    });
+
+    grid.add(hbox, 0, getNextRowIdx(), COLUMNS_NUMBER, 1);
+
   }
 
-  private void initEquipmentsTable() {
-    grid.add(createLabel("Użyty ekwipunek - TABELA"), LABEL_IDX, getNextRowIdx());
+  private void initEquipmentsTableSection() {
+    grid.add(createLabel("Użyty ekwipunek"), LABEL_IDX, getNextRowIdx());
 
     equipmentTable = createTableView();
 
@@ -160,10 +203,35 @@ public class ReportPane {
     equipmentTable.getColumns().addAll(nameColumn, workTimeColumn, fuelTypeColumn);
 
     grid.add(equipmentTable, 0, getNextRowIdx(), COLUMNS_NUMBER, 1);
+
+    HBox hbox = createHbox();
+    Button addEquipmentButton = new Button("Dodaj wyposażenie");
+    TextField nameField = createTextField("Nazwa");
+    TextField workTimeField = createTextField("Czas pracy");
+    TextField fuelTypeField = createTextField("Typ paliwa");
+    hbox.getChildren().addAll(addEquipmentButton, nameField, workTimeField, fuelTypeField);
+
+    addEquipmentButton.setOnAction(event -> {
+      if (StringUtils.isBlank(nameField.getText())) {
+        return;
+      }
+
+      equipmentsList.add(new ReportEquipmentGuiModel()
+              .setName(nameField.getText())
+              .setWorkTime(workTimeField.getText())
+              .setFuelType(fuelTypeField.getText())
+      );
+
+      nameField.clear();
+      workTimeField.clear();
+      fuelTypeField.clear();
+    });
+
+    grid.add(hbox, 0, getNextRowIdx(), COLUMNS_NUMBER, 1);
   }
 
-  private void initFirefightersTable() {
-    grid.add(createLabel("Strażacy - TABELA"), LABEL_IDX, getNextRowIdx());
+  private void initFirefightersTableSection() {
+    grid.add(createLabel("Strażacy"), LABEL_IDX, getNextRowIdx());
 
     firefightersTable = createTableView();
 
@@ -175,10 +243,33 @@ public class ReportPane {
     firefightersTable.getColumns().addAll(nameColumn, surnameColumn);
     firefightersTable.setItems(firefightersList);
     grid.add(firefightersTable, 0, getNextRowIdx(), COLUMNS_NUMBER, 1);
+
+    HBox hbox = createHbox();
+    Button addFirefighterButton = new Button("Dodaj strażaka");
+    TextField nameText = createTextField("Imię");
+    TextField surnameText = createTextField("Nazwisko");
+    hbox.getChildren().addAll(addFirefighterButton, nameText, surnameText);
+
+    addFirefighterButton.setOnAction(event -> {
+      if (StringUtils.isBlank(nameText.getText())) {
+        return;
+      }
+      firefightersList.add(new ReportFirefighterGuiModel()
+              .setName(nameText.getText())
+              .setSurname(surnameText.getText())
+      );
+
+      nameText.clear();
+      surnameText.clear();
+
+    });
+
+    grid.add(hbox, 0, getNextRowIdx(), COLUMNS_NUMBER, 1);
+
   }
 
-  private void initBrigadesTable() {
-    grid.add(createLabel("Zastępy - TABELA"), LABEL_IDX, getNextRowIdx());
+  private void initBrigadesTableSection() {
+    grid.add(createLabel("Zastępy"), LABEL_IDX, getNextRowIdx());
 
     brigadesTable = createTableView();
 
@@ -201,12 +292,108 @@ public class ReportPane {
     brigadesTable.setItems(brigadesList);
     brigadesTable.getColumns().addAll(nameColumn, nenbersNumberColumn, distanceColumn, departureColumn, arrivalColumn, pumpWorkTimeColumn);
     grid.add(brigadesTable, 0, getNextRowIdx(), COLUMNS_NUMBER, 1);
+
+    HBox hbox = createHbox();
+    Button addBrigadeButton = new Button("Dodaj zastęp");
+    TextField nameField = createTextField("Nazwa");
+    TextField membersCountField = createTextField("Liczba osób");
+    TextField distanceField = createTextField("Kilometry");
+    TextField departureField = createTextField("Wyjazd");
+    TextField arrivalField = createTextField("Przyjazd");
+    TextField worktimeField = createTextField("Czas pracy pompy");
+
+    hbox.getChildren().addAll(addBrigadeButton, nameField, membersCountField, distanceField, departureField, arrivalField, worktimeField);
+    grid.add(hbox, 0, getNextRowIdx(), COLUMNS_NUMBER, 1);
+
+    addBrigadeButton.setOnAction(event -> {
+      if (StringUtils.isBlank(nameField.getText())) {
+        return;
+      }
+
+      brigadesList.add(new ReportBrigadeGuiModel()
+              .setName(nameField.getText())
+              .setMembersNumber(membersCountField.getText())
+              .setDistance(distanceField.getText())
+              .setDepartureTime(departureField.getText())
+              .setArrivalTime(arrivalField.getText())
+              .setPumpWorkTime(worktimeField.getText())
+      );
+    });
+
+  }
+
+  private void initSendReportPart() {
+    Separator separator = new Separator(Orientation.HORIZONTAL);
+    grid.add(separator, 0, getNextRowIdx(), COLUMNS_NUMBER, 1);
+
+    HBox hBox = new HBox();
+    Button sendReportBtn = createButton("Wyślij Raport");
+    Button fillWithSampleData = createButton("Uzupełnij przykładowymi wartościami");
+    hBox.getChildren().addAll(sendReportBtn, fillWithSampleData);
+    grid.add(hBox, 0, getNextRowIdx(), COLUMNS_NUMBER, 1);
+
+    sendReportBtn.setOnAction(event -> {
+      // TODO
+    });
+
+    fillWithSampleData.setOnAction(event -> {
+      fillWithData(new ReportGuiModel()
+          .setAccidentType("Pożar")
+          .setActtionName("Pożar samochodu na ul. Bieżanowskiej")
+          .setAreaSize("5m2")
+          .setCommunity("Kraków")
+          .setCreator("kpt. Jan Kowalski")
+          .setObjectName("Samochód fiat Punto")
+          .setOwner("ZIKiT")
+          .setPostName("OSP Bieżanów")
+          .setBrigades(Arrays.asList(
+              new ReportBrigadeGuiModel()
+                  .setName("1 zastęp")
+                  .setPumpWorkTime("40 minut")
+                  .setMembersNumber("4")
+                  .setDistance("3 km")
+                  .setArrivalTime("2015-05-23T12:34:45")
+                  .setDepartureTime("2015-05-23T11:34:45")))
+          .setFirefighters(Arrays.asList(
+              new ReportFirefighterGuiModel()
+                  .setName("Jan")
+                  .setSurname("Kowalski"),
+              new ReportFirefighterGuiModel()
+                  .setName("Maciej")
+                  .setSurname("Kowalski"),
+              new ReportFirefighterGuiModel()
+                  .setName("Janusz")
+                  .setSurname("Kowalski"),
+              new ReportFirefighterGuiModel()
+                  .setName("Igor")
+                  .setSurname("Kowalski")))
+          .setDamages(Arrays.asList(
+              new ReportDamageGuiModel()
+                  .setDescription("Przebita opona"),
+              new ReportDamageGuiModel()
+                  .setDescription("Uszkodzona pompa paliwa")))
+          .setUsedEquipment(Arrays.asList(
+              new ReportEquipmentGuiModel()
+                  .setName("Wóz bojowy nr 4")
+                  .setFuelType("Beznyna")
+                  .setWorkTime("1 godzina"),
+              new ReportEquipmentGuiModel()
+                  .setName("Gaśnica")
+                  .setWorkTime("20 min")
+                  .setFuelType("-"),
+              new ReportEquipmentGuiModel()
+                  .setName("Piasek neutralizujący olej")
+                  .setFuelType("-")
+                  .setWorkTime("-"))));
+
+    });
+
   }
 
   private TableColumn createTableColumn(String header, String property) {
     TableColumn column = new TableColumn(header);
     column.setCellValueFactory(new PropertyValueFactory<>(property));
-    column.setMinWidth(80);
+    column.setMinWidth(100);
     return column;
   }
 
@@ -223,6 +410,27 @@ public class ReportPane {
 
   private int getNextRowIdx() {
     return ++rowIdx;
+  }
+
+  private HBox createHbox() {
+    HBox hbox = new HBox();
+    hbox.setPadding(new Insets(15, 12, 15, 0));
+    hbox.setSpacing(10);
+    return hbox;
+  }
+
+  private Button createButton(String text) {
+    Button button = new Button(text);
+    button.setMinWidth(100);
+    return button;
+  }
+
+  private void fillGuiWithData(ReportGuiModel model) {
+
+  }
+
+  public static enum ReportPaneMode {
+    ADD_REPORT, VIEW_REPORT;
   }
 
 }
