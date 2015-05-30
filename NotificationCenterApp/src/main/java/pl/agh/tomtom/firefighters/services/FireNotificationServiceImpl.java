@@ -47,6 +47,10 @@ public class FireNotificationServiceImpl implements FireNotificationService {
 
     fireNotificationDAO.saveOrUpdate(fireNotification);
 
+    if (id == null){
+      notificationDTO.setId(fireNotification.getId());
+    }
+
     sentNotifications(notificationDTO);
 
     log.exit();

@@ -17,9 +17,11 @@ public class FireNotificationRemoteAssembler {
         .withAddress(dto.getAddress())
         .withCity(dto.getCity())
         .withCreator(dto.getCreator())
-        .withDescription(dto.getDescription()).withLatitude(safeDoubleToString(dto.getGpsXCoordinate()))
+        .withDescription(dto.getDescription())
+        .withLatitude(safeDoubleToString(dto.getGpsXCoordinate()))
         .withLongitude(safeDoubleToString(dto.getGpsYCoordinate()))
-        .withNotifiactionDate(dto.getNotificationDate()).withType(dto.getType());
+        .withNotifiactionDate(dto.getNotificationDate())
+        .withType(dto.getType());
 
     // FIXME:
     idto.withRequestedFirefightersUnitNumber(1);
