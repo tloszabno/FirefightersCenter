@@ -1,6 +1,7 @@
 package pl.agh.tomtom.firefighters.services;
 
 import generated.integracja.common.dto.FireNotificationIDTO;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import pl.agh.tomtom.firefighters.model.FirefightersPost;
 import pl.agh.tomtom.firefighters.remote.FireNotificationNotifier;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,9 +49,7 @@ public class FireNotificationServiceImpl implements FireNotificationService {
 
     fireNotificationDAO.saveOrUpdate(fireNotification);
 
-    if (id == null){
-      notificationDTO.setId(fireNotification.getId());
-    }
+    fillDtoWIthMissingData(notificationDTO, fireNotification);
 
     sentNotifications(notificationDTO);
 
@@ -67,6 +67,21 @@ public class FireNotificationServiceImpl implements FireNotificationService {
       fireNotification = new FireNotification();
     }
     return fireNotification;
+  }
+
+  private void fillDtoWIthMissingData(FireNotificationDTO notificationDTO, FireNotification fireNotification) {
+    if (notificationDTO.getId() == null) {
+      notificationDTO.setId(fireNotification.getId());
+    }
+
+    if (StringUtils.isBlank(notificationDTO.getCreator())) {
+      notificationDTO.setCreator("Beata Kowalska");
+    }
+
+    if (notificationDTO.getNotificationDate() == null) {
+      notificationDTO.setNotificationDate(new Date());
+    }
+
   }
 
   private void sentNotifications(FireNotificationDTO notificationDTO) throws FireException {

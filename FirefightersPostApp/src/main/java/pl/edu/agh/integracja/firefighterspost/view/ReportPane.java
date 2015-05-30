@@ -76,6 +76,26 @@ public class ReportPane {
     brigadesList.addAll(model.getBrigades());
   }
 
+  private void clearAllData() {
+    clearText(postNameText);
+    clearText(actionNameText);
+    clearText(accidentTypeText);
+    clearText(communityText);
+    clearText(areaSizeText);
+    clearText(objectNameText);
+    clearText(objectOwnerText);
+    clearText(reporterText);
+
+    damagesList.clear();
+    equipmentsList.clear();
+    firefightersList.clear();
+    brigadesList.clear();
+  }
+
+  private void clearText(TextField text) {
+    text.clear();
+  }
+
   private void fillTextIfNotBlank(TextField postNameText, String postName) {
     if (StringUtils.isBlank(postNameText.getText())) {
       postNameText.setText(postName);
@@ -302,7 +322,8 @@ public class ReportPane {
     HBox hBox = new HBox();
     Button sendReportBtn = createButton("Wyślij Raport");
     Button fillWithSampleData = createButton("Uzupełnij przykładowymi wartościami");
-    hBox.getChildren().addAll(sendReportBtn, fillWithSampleData);
+    Button clearButton = createButton("Wyczyść dane");
+    hBox.getChildren().addAll(sendReportBtn, fillWithSampleData, clearButton);
     grid.add(hBox, 0, getNextRowIdx(), COLUMNS_NUMBER, 1);
 
     sendReportBtn.setOnAction(event -> {
@@ -359,6 +380,10 @@ public class ReportPane {
                   .setFuelType("-")
                   .setWorkTime("-"))));
 
+    });
+
+    clearButton.setOnAction(event -> {
+      clearAllData();
     });
 
   }
