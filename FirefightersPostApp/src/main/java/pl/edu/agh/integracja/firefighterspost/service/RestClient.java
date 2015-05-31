@@ -25,13 +25,13 @@ public class RestClient {
     return reportIDTO;
   }
 
-  public void getReport() {
+  public ReportIDTO getReport(String reportId) {
     RestTemplate restTemplate = new RestTemplate();
     HashMap<String, Object> urlVariables = new HashMap<>();
-    urlVariables.put("reportIdValue", "12312");
+    urlVariables.put("reportIdValue", reportId);
     ReportIDTO report = restTemplate.getForObject(getFullUrl("report?reportId={reportIdValue}"), ReportIDTO.class, urlVariables);
     logger.info(report.toString());
-
+    return report;
   }
 
   public void notifyCenter(NotificationIDTO request) {

@@ -24,7 +24,7 @@ public class NotificationsService {
   }
 
   public void getReport() {
-    restClient.getReport();
+    restClient.getReport("12312");
   }
 
 

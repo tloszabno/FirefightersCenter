@@ -2,8 +2,7 @@ package pl.edu.agh.integracja.firefighterspost.translator;
 
 import pl.edu.agh.integracja.common.dto.*;
 import pl.edu.agh.integracja.firefighterspost.dateutils.GuiDateCOnverter;
-import pl.edu.agh.integracja.firefighterspost.gui.model.ReportGuiModel;
-import pl.edu.agh.integracja.firefighterspost.gui.model.ReportHeaderGuiModel;
+import pl.edu.agh.integracja.firefighterspost.gui.model.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,5 +53,42 @@ public class ReportsTranslator {
                     .withWorkTimeInH(Integer.parseInt(gui.getWorkTime()))
 
             ).collect(Collectors.toList()));
+  }
+
+  public ReportGuiModel translateReportFromRestToGui(ReportIDTO reportIDTO) {
+    return new ReportGuiModel()
+        .setNotificationId(reportIDTO.getNotificationId())
+        .setAreaSize(reportIDTO.getAreaSize())
+        .setAccidentType(reportIDTO.getAccidentType())
+        .setActtionName(reportIDTO.getActionName())
+        .setCommunity(reportIDTO.getCommunity())
+        .setCreator(reportIDTO.getCreator())
+        .setObjectName(reportIDTO.getObjectName())
+        .setOwner(reportIDTO.getOwner())
+        .setPostName(reportIDTO.getPostName())
+        .setBrigades(reportIDTO.getBrigades().stream().map(rest ->
+                new ReportBrigadeGuiModel()
+                    .setArrivalTime(GuiDateCOnverter.fromDateToGuiShortDisplay(rest.getArrivalTime()))
+                    .setDepartureTime(GuiDateCOnverter.fromDateToGuiShortDisplay(rest.getDepartureTime()))
+                    .setDistance(rest.getDistanceInKm().toString())
+                    .setMembersNumber(rest.getMembersNumber().toString())
+                    .setName(rest.getName())
+                    .setPumpWorkTime(rest.getPumpworkTime())
+        ).collect(Collectors.toList()))
+        .setFirefighters(reportIDTO.getFirefighters().stream().map(rest ->
+                new ReportFirefighterGuiModel()
+                    .setName(rest.getName())
+                    .setSurname(rest.getSurname())
+        ).collect(Collectors.toList()))
+        .setDamages(reportIDTO.getOtherDamages().stream().map(rest ->
+                new ReportDamageGuiModel()
+                    .setDescription(rest.getDamageName())
+        ).collect(Collectors.toList()))
+        .setUsedEquipment(reportIDTO.getUsedEquipment().stream().map(rest ->
+                new ReportEquipmentGuiModel()
+                    .setName(rest.getName())
+                    .setFuelType(rest.getFuelType())
+                    .setWorkTime(rest.getWorkTimeInH().toString())
+        ).collect(Collectors.toList()));
   }
 }

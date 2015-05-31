@@ -27,4 +27,8 @@ public class ReportsService {
     return reportsTranslator.translateListFromRestToGui(reportsList);
   }
 
+  public ReportGuiModel getReport(String reportId) {
+    ReportIDTO reportIDTO = restClient.getReport(reportId);
+    return reportsTranslator.translateReportFromRestToGui(reportIDTO);
+  }
 }
