@@ -59,9 +59,15 @@
 	<bean id="firefightersPostDAO" class="pl.agh.tomtom.firefighters.dao.FirefightersPostDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
+	<bean id="reportDAO" class="pl.agh.tomtom.firefighters.dao.ReportDAO">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
 		
 	<bean id="fireNotificationService" class="pl.agh.tomtom.firefighters.services.FireNotificationServiceImpl"></bean>
 	<bean id="firefightersPostService" class="pl.agh.tomtom.firefighters.services.FirefightersPostServiceImpl"></bean>
+	<bean id="reportService" class="pl.agh.tomtom.firefighters.services.ReportServiceImpl"></bean>
+	
 	<bean id="fireNotificationNotifier" class="pl.agh.tomtom.firefighters.remote.FireNotificationNotifierImpl"></bean>
 	<bean id="firefightersPostDownloader" class="pl.agh.tomtom.firefighters.remote.FirefightersPostDownloaderImpl"></bean>
+	
 </beans>
