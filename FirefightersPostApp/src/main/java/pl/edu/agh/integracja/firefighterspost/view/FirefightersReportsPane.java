@@ -88,15 +88,8 @@ public class FirefightersReportsPane {
     grid.add(hbBtn, 0, 2, 1, 1);
 
     getReportsListBtn.setOnAction(event -> {
+      data.clear();
       data.addAll(reportsService.getReportsList());
-//      data.addAll(Arrays.asList(
-//          new ReportHeaderGuiModel("1", "2015-05-23 12:45:13", "pożar 1", "Kraków, Bieżanowska 12")
-//      ));
-
-//      notificationsService.confirmAlert(table.getSelectionModel().getSelectedItem().getExternalId());
-//      statusText.setFill(Color.FIREBRICK);
-//      statusText.setText("Wysłano potwierdzonie otrzymania alarmu.");
-//      alarmReceivedLbl.setText("");
     });
 
     getReportDetailsBtn = new Button("Pobierz szczegóły raportu");
