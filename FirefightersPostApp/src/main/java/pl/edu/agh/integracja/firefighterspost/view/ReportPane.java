@@ -367,11 +367,11 @@ public class ReportPane {
           .setCreator("kpt. Jan Kowalski")
           .setObjectName("Samochód fiat Punto")
           .setOwner("ZIKiT")
-          .setPostName("OSP Bieżanów")
+          .setPostName("OSP biezanow")
           .setBrigades(Arrays.asList(
               new ReportBrigadeGuiModel()
                   .setName("1 zastęp")
-                  .setPumpWorkTime("40 minut")
+                  .setPumpWorkTime("1")
                   .setMembersNumber("4")
                   .setDistance("3")
                   .setArrivalTime("2015-05-23T12:34:45")
