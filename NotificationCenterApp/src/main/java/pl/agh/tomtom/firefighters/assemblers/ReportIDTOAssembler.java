@@ -67,7 +67,7 @@ public class ReportIDTOAssembler {
         .withAreaSize(reportDTO.getSize())
         .withPostName(reportDTO.getFirefightersPost().getName())
         .withActionName(reportDTO.getFireNotification().getType())
-        .withActionName(reportDTO.getNotificationType())
+        .withAccidentType(reportDTO.getNotificationType())
         .withOtherDamages(Arrays.asList(StringUtils.split(reportDTO.getOtherDamage(), ","))
             .stream()
             .map(string -> new OtherDamage()
