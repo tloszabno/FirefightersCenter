@@ -1,93 +1,100 @@
 package pl.agh.tomtom.firefighters.dto;
 
-import java.util.Date;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.Date;
+
 public class FirefightersBrigadeReportEntryDTO {
-	private Long id;
-	private String name;
+  private Long id;
+  private String name;
 
-	private Integer memberNumber;
+  private Integer memberNumber;
 
-	private Integer distanceKM;
+  private Integer distanceKM;
 
-	private Date departureTime;
+  private Date departureTime;
 
-	private Date arrivalTime;
+  private Date arrivalTime;
 
-	private Integer pumpWorktime;
+  private Integer pumpWorktime;
 
-	private String tankSource;
+  private String tankSource;
 
-	public Long getId() {
-		return id;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+  public FirefightersBrigadeReportEntryDTO setId(Long id) {
+    this.id = id;
+    return this;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public FirefightersBrigadeReportEntryDTO setName(String name) {
+    this.name = name;
+    return this;
+  }
 
-	public Integer getMemberNumber() {
-		return memberNumber;
-	}
+  public Integer getMemberNumber() {
+    return memberNumber;
+  }
 
-	public void setMemberNumber(Integer memberNumber) {
-		this.memberNumber = memberNumber;
-	}
+  public FirefightersBrigadeReportEntryDTO setMemberNumber(Integer memberNumber) {
+    this.memberNumber = memberNumber;
+    return this;
+  }
 
-	public Integer getDistanceKM() {
-		return distanceKM;
-	}
+  public Integer getDistanceKM() {
+    return distanceKM;
+  }
 
-	public void setDistanceKM(Integer distanceKM) {
-		this.distanceKM = distanceKM;
-	}
+  public FirefightersBrigadeReportEntryDTO setDistanceKM(Integer distanceKM) {
+    this.distanceKM = distanceKM;
+    return this;
+  }
 
-	public Date getDepartureTime() {
-		return departureTime;
-	}
+  public Date getDepartureTime() {
+    return departureTime;
+  }
 
-	public void setDepartureTime(Date departureTime) {
-		this.departureTime = departureTime;
-	}
+  public FirefightersBrigadeReportEntryDTO setDepartureTime(Date departureTime) {
+    this.departureTime = departureTime;
+    return this;
+  }
 
-	public Date getArrivalTime() {
-		return arrivalTime;
-	}
+  public Date getArrivalTime() {
+    return arrivalTime;
+  }
 
-	public void setArrivalTime(Date arrivalTime) {
-		this.arrivalTime = arrivalTime;
-	}
+  public FirefightersBrigadeReportEntryDTO setArrivalTime(Date arrivalTime) {
+    this.arrivalTime = arrivalTime;
+    return this;
+  }
 
-	public Integer getPumpWorktime() {
-		return pumpWorktime;
-	}
+  public Integer getPumpWorktime() {
+    return pumpWorktime;
+  }
 
-	public void setPumpWorktime(Integer pumpWorktime) {
-		this.pumpWorktime = pumpWorktime;
-	}
+  public FirefightersBrigadeReportEntryDTO setPumpWorktime(Integer pumpWorktime) {
+    this.pumpWorktime = pumpWorktime;
+    return this;
+  }
 
-	public FirefightersBrigadeReportEntryDTO setTankSource(String tankSource) {
-		this.tankSource = tankSource;
-		return this;
-	}
+  public String getTankSource() {
+    return tankSource;
+  }
 
-	public String getTankSource() {
-		return tankSource;
-	}
+  public FirefightersBrigadeReportEntryDTO setTankSource(String tankSource) {
+    this.tankSource = tankSource;
+    return this;
+  }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+  @Override
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this);
+  }
 
 }

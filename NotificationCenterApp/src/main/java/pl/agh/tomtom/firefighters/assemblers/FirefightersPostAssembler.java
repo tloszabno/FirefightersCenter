@@ -15,12 +15,14 @@ public class FirefightersPostAssembler {
 
 	public static FirefightersPostDTO fromModel(FirefightersPost model) {
 		FirefightersPostDTO dto = new FirefightersPostDTO();
-		dto.setAddress(model.getAddress())//
-				.setCity(model.getCity())//
-				.setCommunity(model.getCommunity())//
-				.setId(model.getId())//
-				.setName(model.getName())//
-				.setSystemIpAddress(model.getSystemIpAddress());
+		if (model != null) {
+			dto.setAddress(model.getAddress())//
+					.setCity(model.getCity())//
+					.setCommunity(model.getCommunity())//
+					.setId(model.getId())//
+					.setName(model.getName())//
+					.setSystemIpAddress(model.getSystemIpAddress());
+		}
 		return dto;
 	}
 }

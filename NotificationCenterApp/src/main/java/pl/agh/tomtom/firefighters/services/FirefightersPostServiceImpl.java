@@ -1,17 +1,12 @@
 package pl.agh.tomtom.firefighters.services;
 
 import generated.integracja.common.dto.CurrentStateIDTO;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import pl.agh.tomtom.firefighters.assemblers.FirefightersPostAssembler;
 import pl.agh.tomtom.firefighters.assemblers.FirefightersPostCurrentDetailsAssebler;
 import pl.agh.tomtom.firefighters.dao.FirefightersPostDAO;
@@ -21,81 +16,95 @@ import pl.agh.tomtom.firefighters.exceptions.FireException;
 import pl.agh.tomtom.firefighters.model.FirefightersPost;
 import pl.agh.tomtom.firefighters.remote.FirefightersPostDownloader;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Transactional(propagation = Propagation.REQUIRED)
 public class FirefightersPostServiceImpl implements FirefightersPostService {
 
-	private static final Logger log = LogManager.getLogger();
+  private static final Logger log = LogManager.getLogger();
 
-	@Autowired
-	@Qualifier("firefightersPostDAO")
-	private FirefightersPostDAO firefightersPostDAO;
+  @Autowired
+  @Qualifier("firefightersPostDAO")
+  private FirefightersPostDAO firefightersPostDAO;
 
-	@Autowired
-	@Qualifier("firefightersPostDownloader")
-	private FirefightersPostDownloader firefightersPostDownloader;
+  @Autowired
+  @Qualifier("firefightersPostDownloader")
+  private FirefightersPostDownloader firefightersPostDownloader;
 
-	@Override
-	public void saveFirefightersPost(FirefightersPostDTO postDTO) throws FireException {
-		log.entry(postDTO);
+  @Override
+  public void saveFirefightersPost(FirefightersPostDTO postDTO) throws FireException {
+    log.entry(postDTO);
 
-		Long id = postDTO.getId();
-		FirefightersPost postModel = null;
-		if (id != null) {
-			postModel = firefightersPostDAO.get(id);
-			if (postModel == null) {
-				throw new FireException("Firefighters post with id=[" + id + "] not found");
-			}
-		} else {
-			postModel = new FirefightersPost();
-		}
+    Long id = postDTO.getId();
+    FirefightersPost postModel = null;
+    if (id != null) {
+      postModel = firefightersPostDAO.get(id);
+      if (postModel == null) {
+        throw new FireException("Firefighters post with id=[" + id + "] not found");
+      }
+    } else {
+      postModel = new FirefightersPost();
+    }
 
-		FirefightersPostAssembler.fillModelWithDTO(postModel, postDTO);
+    FirefightersPostAssembler.fillModelWithDTO(postModel, postDTO);
 
-		firefightersPostDAO.saveOrUpdate(postModel);
+    firefightersPostDAO.saveOrUpdate(postModel);
 
-		log.exit();
-	}
+    log.exit();
+  }
 
-	@Override
-	public List<FirefightersPostDTO> getAllFirefightersPosts() {
-		log.entry();
+  @Override
+  public List<FirefightersPostDTO> getAllFirefightersPosts() {
+    log.entry();
 
-		List<FirefightersPost> postsInDB = firefightersPostDAO.list();
-		List<FirefightersPostDTO> posts = postsInDB.stream()//
-				.map(s -> FirefightersPostAssembler.fromModel(s))//
-				.collect(Collectors.toList());
+    List<FirefightersPost> postsInDB = firefightersPostDAO.list();
+    List<FirefightersPostDTO> posts = postsInDB.stream()//
+        .map(s -> FirefightersPostAssembler.fromModel(s))//
+        .collect(Collectors.toList());
 
-		log.exit(posts);
-		return posts;
-	}
+    log.exit(posts);
+    return posts;
+  }
 
-	@Override
-	public FirefightersPostCurrentDetailsDTO getCurrentDetails(Long id) throws FireException {
-		log.entry();
+  @Override
+  public FirefightersPostCurrentDetailsDTO getCurrentDetails(Long id) throws FireException {
+    log.entry();
 
-		FirefightersPostDTO firefightersPostDTO = get(id);
+    FirefightersPostDTO firefightersPostDTO = get(id);
 
-		CurrentStateIDTO details = firefightersPostDownloader.getCurrentState(firefightersPostDTO.getSystemIpAddress());
-		FirefightersPostCurrentDetailsDTO detailsDTO = FirefightersPostCurrentDetailsAssebler.fromRemote(details,
-				firefightersPostDTO);
+    CurrentStateIDTO details = firefightersPostDownloader.getCurrentState(firefightersPostDTO.getSystemIpAddress());
+    FirefightersPostCurrentDetailsDTO detailsDTO = FirefightersPostCurrentDetailsAssebler.fromRemote(details,
+        firefightersPostDTO);
 
-		log.exit(detailsDTO);
-		return detailsDTO;
-	}
+    log.exit(detailsDTO);
+    return detailsDTO;
+  }
 
-	@Override
-	public FirefightersPostDTO get(Long id) throws FireException {
-		log.entry();
+  @Override
+  public FirefightersPostDTO get(Long id) throws FireException {
+    log.entry();
 
-		FirefightersPost firefightersPost = firefightersPostDAO.get(id);
-		if (firefightersPost == null) {
-			throw new FireException("Post with id=[" + id + "] not found");
-		}
+    FirefightersPost firefightersPost = firefightersPostDAO.get(id);
+    if (firefightersPost == null) {
+      throw new FireException("Post with id=[" + id + "] not found");
+    }
 
-		FirefightersPostDTO dto = FirefightersPostAssembler.fromModel(firefightersPost);
+    FirefightersPostDTO dto = FirefightersPostAssembler.fromModel(firefightersPost);
 
-		log.exit(dto);
-		return dto;
-	}
+    log.exit(dto);
+    return dto;
+  }
+
+  @Override
+  public FirefightersPostDTO getByName(String postName) throws FireException {
+    List<FirefightersPost> firefightersPosts = firefightersPostDAO.getByName(postName);
+
+    if (!firefightersPosts.isEmpty()) {
+      return FirefightersPostAssembler.fromModel(firefightersPosts.get(0));
+    }
+
+    throw new FireException("Post with given name doesn't exist: " + postName);
+  }
 
 }

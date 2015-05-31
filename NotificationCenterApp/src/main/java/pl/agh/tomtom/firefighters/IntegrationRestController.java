@@ -2,8 +2,14 @@ package pl.agh.tomtom.firefighters;
 
 import generated.integracja.common.dto.*;
 import org.springframework.web.bind.annotation.*;
+import pl.agh.tomtom.firefighters.assemblers.ReportIDTOAssembler;
+import pl.agh.tomtom.firefighters.dto.FirefightersPostDTO;
+import pl.agh.tomtom.firefighters.dto.ReportDTO;
 import pl.agh.tomtom.firefighters.exceptions.FireException;
+import pl.agh.tomtom.firefighters.model.FirefightersPost;
 import pl.agh.tomtom.firefighters.services.FireNotificationService;
+import pl.agh.tomtom.firefighters.services.FirefightersPostService;
+import pl.agh.tomtom.firefighters.services.ReportService;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -15,6 +21,12 @@ public class IntegrationRestController {
   @Resource(name = "fireNotificationService")
   private FireNotificationService fireNotificationService;
 
+  @Resource(name = "reportService")
+  private ReportService reportService;
+
+  @Resource(name = "firefightersPostService")
+  private FirefightersPostService firefightersPostService;
+
   @RequestMapping(value = "/notification", method = RequestMethod.POST)
   public String postNotification(@RequestBody NotificationIDTO notification) throws FireException {
     fireNotificationService.updateStateOfFireNotification(Long.valueOf(notification.getId()), notification.getState().name());
@@ -22,7 +34,14 @@ public class IntegrationRestController {
   }
 
   @RequestMapping(value = "/report", method = RequestMethod.POST)
-  public String postReport(@RequestBody ReportIDTO report) {
+  public String postReport(@RequestBody ReportIDTO report) throws FireException {
+    ReportDTO reportInternal = ReportIDTOAssembler.fromIDTOModel(report);
+
+    FirefightersPostDTO firefightersPostDTO = firefightersPostService.getByName(report.getPostName());
+    reportInternal.setFirefightersPost(firefightersPostDTO);
+
+    reportService.saveReport(reportInternal);
+
     return "OK - report saved.";
   }
 

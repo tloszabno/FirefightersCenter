@@ -1,17 +1,19 @@
 package pl.agh.tomtom.firefighters.services;
 
-import java.util.List;
-
 import pl.agh.tomtom.firefighters.dto.FirefightersPostCurrentDetailsDTO;
 import pl.agh.tomtom.firefighters.dto.FirefightersPostDTO;
 import pl.agh.tomtom.firefighters.exceptions.FireException;
 
+import java.util.List;
+
 public interface FirefightersPostService {
-	public void saveFirefightersPost(FirefightersPostDTO post) throws FireException;
+  void saveFirefightersPost(FirefightersPostDTO post) throws FireException;
 
-	public List<FirefightersPostDTO> getAllFirefightersPosts();
+  List<FirefightersPostDTO> getAllFirefightersPosts();
 
-	public FirefightersPostCurrentDetailsDTO getCurrentDetails(Long id) throws FireException;
+  FirefightersPostCurrentDetailsDTO getCurrentDetails(Long id) throws FireException;
 
-	public FirefightersPostDTO get(Long id) throws FireException;
+  FirefightersPostDTO get(Long id) throws FireException;
+
+  FirefightersPostDTO getByName(String postName) throws FireException;
 }
