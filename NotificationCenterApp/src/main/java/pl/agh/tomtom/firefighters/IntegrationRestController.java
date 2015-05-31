@@ -2,11 +2,11 @@ package pl.agh.tomtom.firefighters;
 
 import generated.integracja.common.dto.*;
 import org.springframework.web.bind.annotation.*;
+import pl.agh.tomtom.firefighters.assemblers.ReportHeaderAssembler;
 import pl.agh.tomtom.firefighters.assemblers.ReportIDTOAssembler;
 import pl.agh.tomtom.firefighters.dto.FirefightersPostDTO;
 import pl.agh.tomtom.firefighters.dto.ReportDTO;
 import pl.agh.tomtom.firefighters.exceptions.FireException;
-import pl.agh.tomtom.firefighters.model.FirefightersPost;
 import pl.agh.tomtom.firefighters.services.FireNotificationService;
 import pl.agh.tomtom.firefighters.services.FirefightersPostService;
 import pl.agh.tomtom.firefighters.services.ReportService;
@@ -14,6 +14,7 @@ import pl.agh.tomtom.firefighters.services.ReportService;
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 public class IntegrationRestController {
@@ -47,6 +48,12 @@ public class IntegrationRestController {
 
   @RequestMapping(value = "/reports", method = RequestMethod.GET)
   public ReportListIDTO getReports(@RequestParam(value = "postName", required = true) String postName) {
+
+    List<ReportDTO> allReports = reportService.getAllReports();
+    return ReportHeaderAssembler.fromReportsListToHeaders(allReports);
+  }
+
+  private ReportListIDTO getDummyReportsList() {
     ReportListIDTO reportsList = new ReportListIDTO();
     reportsList.withReportHeaders(Arrays.asList(
         new ReportHeader()
@@ -60,11 +67,17 @@ public class IntegrationRestController {
             .withNotificationDate("2015-02-11T3:33:00")
             .withReportId("58523")
     ));
+
     return reportsList;
   }
 
   @RequestMapping(value = "/report", method = RequestMethod.GET)
-  public ReportIDTO getReport(@RequestParam(value = "reportId", required = true) String reportId) {
+  public ReportIDTO getReport(@RequestParam(value = "reportId", required = true) String reportId) throws FireException {
+    ReportDTO reportDTO = reportService.getReport(Long.parseLong(reportId));
+    return ReportIDTOAssembler.toIDTOModel(reportDTO);
+  }
+
+  private ReportIDTO getDummyReport() {
     ReportIDTO report = new ReportIDTO()
         .withAccidentType("Pożar")
         .withActionName("Pożark na S7")

@@ -1,9 +1,10 @@
 package pl.agh.tomtom.firefighters.assemblers;
 
-import generated.integracja.common.dto.ReportIDTO;
+import generated.integracja.common.dto.*;
 import org.apache.commons.lang3.StringUtils;
 import pl.agh.tomtom.firefighters.dto.*;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class ReportIDTOAssembler {
@@ -54,5 +55,45 @@ public class ReportIDTOAssembler {
         ).collect(Collectors.toList()));
 
     return reportDTO;
+  }
+
+  public static ReportIDTO toIDTOModel(ReportDTO reportDTO) {
+    return new ReportIDTO()
+        .withCommunity(reportDTO.getCommunity())
+        .withCreator(reportDTO.getCreator())
+        .withNotificationId(reportDTO.getFireNotification().getId().toString())
+        .withObjectName(reportDTO.getObject())
+        .withOwner(reportDTO.getOwner())
+        .withAreaSize(reportDTO.getSize())
+        .withOtherDamages(Arrays.asList(StringUtils.split(reportDTO.getOtherDamage(), ","))
+            .stream()
+            .map(string -> new OtherDamage()
+                .withDamageName(string.trim()))
+            .collect(Collectors.toList()))
+        .withUsedEquipment(
+            reportDTO.getEquipment().stream()
+                .map(eq -> new UsedEquipment()
+                    .withName(eq.getEquipmentType())
+                    .withFuelType(eq.getFuelType())
+                    .withWorkTimeInH(eq.getWorkTimeH().intValue()))
+                .collect(Collectors.toList())
+        )
+        .withFirefighters(reportDTO.getFiremans().stream()
+            .map(fm ->
+                    new Firefighter()
+                        .withName(fm.getFirstName())
+                        .withSurname(fm.getSurname())
+            ).collect(Collectors.toList()))
+        .withBrigades(reportDTO.getFirefightersBrigades().stream()
+            .map(brigade -> new Brigade()
+                    .withName(brigade.getName())
+                    .withDistanceInKm(brigade.getDistanceKM())
+                    .withMembersNumber(brigade.getMemberNumber())
+                    .withPumpworkTime(brigade.getPumpWorktime().toString())
+                    .withArrivalTime(brigade.getArrivalTime())
+                    .withDepartureTime(brigade.getDepartureTime())
+            )
+            .collect(Collectors.toList()));
+
   }
 }
