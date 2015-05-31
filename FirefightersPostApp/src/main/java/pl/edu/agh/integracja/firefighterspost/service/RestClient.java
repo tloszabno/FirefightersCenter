@@ -12,6 +12,11 @@ public class RestClient {
 
   Logger logger = Logger.getLogger(RestClient.class);
 
+  public void sendReport(ReportIDTO report) {
+    RestTemplate restTemplate = new RestTemplate();
+    restTemplate.postForLocation(getFullUrl("report"), report);
+  }
+
   public ReportListIDTO getReportsList() {
     RestTemplate restTemplate = new RestTemplate();
     HashMap<String, Object> urlVariables = new HashMap<>();

@@ -18,6 +18,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import pl.edu.agh.integracja.firefighterspost.gui.model.AlertGuiModel;
 import pl.edu.agh.integracja.firefighterspost.service.NotificationsService;
+import pl.edu.agh.integracja.firefighterspost.service.ReportsService;
 
 import javax.annotation.Resource;
 
@@ -36,6 +37,9 @@ public class FirefightersAlertsPane implements AlertListener<AlertGuiModel> {
 
   @Resource(name = "notificationsService")
   private NotificationsService notificationsService;
+
+  @Resource(name = "reportsService")
+  private ReportsService reportsService;
 
   private Label alarmReceivedLbl;
   private Button confirmAlertBtn;
@@ -153,12 +157,13 @@ public class FirefightersAlertsPane implements AlertListener<AlertGuiModel> {
     grid.add(hbBtn, 2, GRID_BUTTONS_IDX, 1, 1);
 
     reportAlertBtn.setOnAction(event -> {
+      Long externalNotificationId = table.getSelectionModel().getSelectedItem().getExternalId();
+
 //      notificationsService.getReport();
 
-      new ReportWindow().initStage(new ReportPane().initView(ReportPane.ReportPaneMode.ADD_REPORT)).show();
+      ReportWindow reportWindow = new ReportWindow();
+      reportWindow.initStage(new ReportPane(reportsService, ReportPane.ReportPaneMode.ADD_REPORT, externalNotificationId).initView()).show();
 
-      statusText.setFill(Color.FIREBRICK);
-      statusText.setText("Wysłano raport.");
       alarmReceivedLbl.setText("");
     });
   }

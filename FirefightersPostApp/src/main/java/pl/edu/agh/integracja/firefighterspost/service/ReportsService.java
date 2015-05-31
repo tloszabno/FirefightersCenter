@@ -1,6 +1,8 @@
 package pl.edu.agh.integracja.firefighterspost.service;
 
+import pl.edu.agh.integracja.common.dto.ReportIDTO;
 import pl.edu.agh.integracja.common.dto.ReportListIDTO;
+import pl.edu.agh.integracja.firefighterspost.gui.model.ReportGuiModel;
 import pl.edu.agh.integracja.firefighterspost.gui.model.ReportHeaderGuiModel;
 import pl.edu.agh.integracja.firefighterspost.translator.ReportsTranslator;
 
@@ -15,12 +17,14 @@ public class ReportsService {
   @Resource(name = "reportsTranslator")
   private ReportsTranslator reportsTranslator;
 
-  public void sendReport() {
+  public void sendReport(ReportGuiModel reportGuiModel) {
+    ReportIDTO reportIDTO =    reportsTranslator.translateReportFromGuiToRest(reportGuiModel);
+    restClient.sendReport(reportIDTO);
   }
 
   public List<ReportHeaderGuiModel> getReportsList() {
     ReportListIDTO reportsList = restClient.getReportsList();
-    return reportsTranslator.fromRestToGui(reportsList);
+    return reportsTranslator.translateListFromRestToGui(reportsList);
   }
 
 }

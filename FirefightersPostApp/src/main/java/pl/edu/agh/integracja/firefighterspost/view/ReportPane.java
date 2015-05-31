@@ -14,7 +14,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import org.apache.commons.lang3.StringUtils;
 import pl.edu.agh.integracja.firefighterspost.gui.model.*;
+import pl.edu.agh.integracja.firefighterspost.service.ReportsService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ReportPane {
@@ -26,6 +28,7 @@ public class ReportPane {
   final ObservableList<ReportEquipmentGuiModel> equipmentsList = FXCollections.observableArrayList();
   final ObservableList<ReportFirefighterGuiModel> firefightersList = FXCollections.observableArrayList();
   final ObservableList<ReportBrigadeGuiModel> brigadesList = FXCollections.observableArrayList();
+
   private GridPane grid;
   private TextField postNameText;
   private TextField actionNameText;
@@ -44,10 +47,16 @@ public class ReportPane {
   private int rowIdx = 0;
 
   private ReportPaneMode displayMode;
+  private ReportsService reportsService;
+  private Long reportId;
 
-  public GridPane initView(ReportPaneMode mode) {
-    this.displayMode = mode;
+  public ReportPane(ReportsService reportsService, ReportPaneMode displayMode, Long reportId) {
+    this.reportsService = reportsService;
+    this.displayMode = displayMode;
+    this.reportId = reportId;
+  }
 
+  public GridPane initView() {
     initGrid();
     initHeader();
     initLabelsAndText();
@@ -74,6 +83,23 @@ public class ReportPane {
     equipmentsList.addAll(model.getUsedEquipment());
     firefightersList.addAll(model.getFirefighters());
     brigadesList.addAll(model.getBrigades());
+  }
+
+  private ReportGuiModel readModelFromGui() {
+    return new ReportGuiModel()
+        .setNotificationId(reportId.toString())
+        .setPostName(postNameText.getText())
+        .setActtionName(actionNameText.getText())
+        .setAccidentType(accidentTypeText.getText())
+        .setAreaSize(areaSizeText.getText())
+        .setCommunity(communityText.getText())
+        .setCreator(reporterText.getText())
+        .setObjectName(objectNameText.getText())
+        .setOwner(objectOwnerText.getText())
+        .setDamages(new ArrayList<>(damagesList))
+        .setUsedEquipment(new ArrayList<>(equipmentsList))
+        .setFirefighters(new ArrayList<>(firefightersList))
+        .setBrigades(new ArrayList<>(brigadesList));
   }
 
   private void clearAllData() {
@@ -190,7 +216,7 @@ public class ReportPane {
     equipmentTable = createTableView();
 
     TableColumn nameColumn = createTableColumn("Nazwa", "name");
-    TableColumn workTimeColumn = createTableColumn("Czas pracy", "workTime");
+    TableColumn workTimeColumn = createTableColumn("Czas pracy [h]", "workTime");
     TableColumn fuelTypeColumn = createTableColumn("Typ paliwa", "fuelType");
 
     equipmentTable.setItems(equipmentsList);
@@ -203,7 +229,7 @@ public class ReportPane {
       HBox hbox = createHbox();
       Button addEquipmentButton = new Button("Dodaj wyposażenie");
       TextField nameField = createTextField("Nazwa");
-      TextField workTimeField = createTextField("Czas pracy");
+      TextField workTimeField = createTextField("Czas pracy [h]");
       TextField fuelTypeField = createTextField("Typ paliwa");
       hbox.getChildren().addAll(addEquipmentButton, nameField, workTimeField, fuelTypeField);
 
@@ -327,7 +353,9 @@ public class ReportPane {
     grid.add(hBox, 0, getNextRowIdx(), COLUMNS_NUMBER, 1);
 
     sendReportBtn.setOnAction(event -> {
-      // TODO
+
+      ReportGuiModel reportModel = readModelFromGui();
+      reportsService.sendReport(reportModel);
     });
 
     fillWithSampleData.setOnAction(event -> {
@@ -345,7 +373,7 @@ public class ReportPane {
                   .setName("1 zastęp")
                   .setPumpWorkTime("40 minut")
                   .setMembersNumber("4")
-                  .setDistance("3 km")
+                  .setDistance("3")
                   .setArrivalTime("2015-05-23T12:34:45")
                   .setDepartureTime("2015-05-23T11:34:45")))
           .setFirefighters(Arrays.asList(
@@ -370,15 +398,15 @@ public class ReportPane {
               new ReportEquipmentGuiModel()
                   .setName("Wóz bojowy nr 4")
                   .setFuelType("Beznyna")
-                  .setWorkTime("1 godzina"),
+                  .setWorkTime("1"),
               new ReportEquipmentGuiModel()
                   .setName("Gaśnica")
-                  .setWorkTime("20 min")
+                  .setWorkTime("1")
                   .setFuelType("-"),
               new ReportEquipmentGuiModel()
                   .setName("Piasek neutralizujący olej")
                   .setFuelType("-")
-                  .setWorkTime("-"))));
+                  .setWorkTime("0"))));
 
     });
 

@@ -107,8 +107,8 @@ public class FirefightersReportsPane {
 
     getReportDetailsBtn.setOnAction(event -> {
 
-      ReportPane reportPane = new ReportPane();
-      GridPane reportsPane = reportPane.initView(ReportPane.ReportPaneMode.VIEW_REPORT);
+      ReportPane reportPane = new ReportPane(reportsService,ReportPane.ReportPaneMode.VIEW_REPORT, null  );
+      GridPane reportsPane = reportPane.initView();
       reportPane.fillWithData(new ReportGuiModel()
               .setAccidentType("Pożar")
               .setActtionName("Pożar samochodu na ul. Bieżanowskiej")
@@ -123,7 +123,7 @@ public class FirefightersReportsPane {
                       .setName("1 zastęp")
                       .setPumpWorkTime("40 minut")
                       .setMembersNumber("4")
-                      .setDistance("3 km")
+                      .setDistance("3")
                       .setArrivalTime("2015-05-23T12:34:45")
                       .setDepartureTime("2015-05-23T11:34:45")))
               .setFirefighters(Arrays.asList(
