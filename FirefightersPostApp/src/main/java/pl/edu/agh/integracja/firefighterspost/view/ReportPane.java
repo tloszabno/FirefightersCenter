@@ -360,17 +360,17 @@ public class ReportPane {
 
     fillWithSampleData.setOnAction(event -> {
       fillWithData(new ReportGuiModel()
-          .setAccidentType("Pożar")
-          .setActtionName("Pożar samochodu na ul. Bieżanowskiej")
+          .setAccidentType("Pozar")
+          .setActtionName("Pozar samochodu na ul. Biezanowskiej")
           .setAreaSize("5m2")
-          .setCommunity("Kraków")
+          .setCommunity("Krakow")
           .setCreator("kpt. Jan Kowalski")
-          .setObjectName("Samochód fiat Punto")
+          .setObjectName("Samochod fiat Punto")
           .setOwner("ZIKiT")
           .setPostName("OSP biezanow")
           .setBrigades(Arrays.asList(
               new ReportBrigadeGuiModel()
-                  .setName("1 zastęp")
+                  .setName("1 zastep")
                   .setPumpWorkTime("1")
                   .setMembersNumber("4")
                   .setDistance("3")
@@ -396,11 +396,11 @@ public class ReportPane {
                   .setDescription("Uszkodzona pompa paliwa")))
           .setUsedEquipment(Arrays.asList(
               new ReportEquipmentGuiModel()
-                  .setName("Wóz bojowy nr 4")
+                  .setName("Woz bojowy nr 4")
                   .setFuelType("Beznyna")
                   .setWorkTime("1"),
               new ReportEquipmentGuiModel()
-                  .setName("Gaśnica")
+                  .setName("Gasnica")
                   .setWorkTime("1")
                   .setFuelType("-"),
               new ReportEquipmentGuiModel()

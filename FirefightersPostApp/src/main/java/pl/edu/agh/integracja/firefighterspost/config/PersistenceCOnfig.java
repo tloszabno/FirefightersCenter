@@ -45,7 +45,7 @@ public class PersistenceConfig {
   private Properties hibernateProperties() {
     return new Properties() {
       {
-        setProperty("hibernate.hbm2ddl.auto", "update");
+        setProperty("hibernate.hbm2ddl.auto", "create");
         setProperty("hibernate.dialect", "org.hibernate.dialect.SQLiteDialect");
         setProperty("hibernate.globally_quoted_identifiers", "true");
         setProperty("hibernate.show_sql", "true");
