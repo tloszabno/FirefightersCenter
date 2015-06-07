@@ -5,6 +5,7 @@ import org.springframework.web.client.RestTemplate;
 import pl.edu.agh.integracja.common.dto.NotificationIDTO;
 import pl.edu.agh.integracja.common.dto.ReportIDTO;
 import pl.edu.agh.integracja.common.dto.ReportListIDTO;
+import pl.edu.agh.integracja.firefighterspost.config.EndpointConfig;
 
 import java.util.HashMap;
 
@@ -40,8 +41,7 @@ public class RestClient {
   }
 
   private String getFullUrl(String path) {
-    return "http://192.168.31.2:8080/NotificationCenterApp/" + path;
-//    return "http://localhost:8080/NotificationCenterApp/" + path;
+    return "http://" + EndpointConfig.NOTIFICATION_CENTER_IP + ":8080/NotificationCenterApp/" + path;
   }
 
 }

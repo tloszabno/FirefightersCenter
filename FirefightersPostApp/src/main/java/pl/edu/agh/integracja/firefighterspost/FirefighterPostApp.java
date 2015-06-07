@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Lazy;
+import pl.edu.agh.integracja.firefighterspost.config.EndpointConfig;
 import pl.edu.agh.integracja.firefighterspost.dao.DummyDataProvider;
 import pl.edu.agh.integracja.firefighterspost.view.FirefightersRootPane;
 
@@ -36,6 +37,13 @@ public class FirefighterPostApp extends Application {
   }
 
   public static void main(String[] args) {
+    if (args.length < 1) {
+      System.out.println("Missing argument notification center IP. Example:\njava -jar 127.0.0.1");
+      return;
+    }
+
+    EndpointConfig.NOTIFICATION_CENTER_IP = args[0];
+
     launchApp(FirefighterPostApp.class, args);
   }
 
